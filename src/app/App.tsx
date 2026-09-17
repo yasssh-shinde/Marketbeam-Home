@@ -1,19 +1,18 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Shield, BarChart3, Users, Eye, Target, ChevronDown,
   Check, ArrowRight, Play, Globe, Zap, Lock, FileText,
-  TrendingUp, Award, Building2, Briefcase, HeartPulse,
-  FlaskConical, Landmark, ShieldCheck, Database,
-  CheckCircle2, Calendar, Layers, BookOpen, Video,
-  FileBarChart, Newspaper, X, Menu, Phone, ClipboardList,
-  Activity, Cpu, Sparkles, GitBranch, Archive, Bell,
-  Twitter, Linkedin, Youtube, Star, Search, AlertTriangle,
-  MessageSquare, PieChart, LayoutDashboard, Workflow,
-  RefreshCcw, Settings, ChevronRight, Filter, MoreHorizontal
+  TrendingUp, Building2, Landmark, FlaskConical,
+  ShieldCheck, Database, CheckCircle2, Calendar, Layers,
+  BookOpen, Video, FileBarChart, Newspaper, X, Menu,
+  ClipboardList, Activity, Cpu, Sparkles, GitBranch, Archive,
+  Bell, Twitter, Linkedin, Youtube, Star, AlertTriangle,
+  Workflow, RefreshCcw, Settings, ChevronRight, Filter,
+  CheckSquare, ShieldAlert, Award
 } from "lucide-react";
 
 /* ─────────────────────────────────────────────
-   Utilities
+   Utilities & Color Constants
 ───────────────────────────────────────────── */
 const cn = (...c: (string | boolean | undefined | null)[]) =>
   c.filter(Boolean).join(" ");
@@ -55,12 +54,11 @@ function useCountUp(end: number, duration = 2000, decimals = 0) {
 }
 
 /* ─────────────────────────────────────────────
-   NAV
+   NAV (Header - Untouched design)
 ───────────────────────────────────────────── */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 24);
@@ -74,7 +72,7 @@ function Nav() {
     { label: "Compliance", href: "#compliance" },
     { label: "Integrations", href: "#integrations" },
     { label: "Resources", href: "#resources" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Why MarketBeam", href: "#why-marketbeam" },
   ];
 
   return (
@@ -109,7 +107,7 @@ function Nav() {
           <a href="#demo"
             className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-white px-5 py-2.5 rounded-xl shadow-md transition-all duration-200 hover:shadow-lg hover:-translate-y-px"
             style={{ background: `linear-gradient(135deg, ${TEAL} 0%, ${TEAL_DARK} 100%)` }}>
-            Schedule Demo <ArrowRight className="w-3.5 h-3.5" />
+            Book A Demo <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
 
@@ -131,7 +129,7 @@ function Nav() {
           ))}
           <a href="#demo" className="mt-4 block text-center text-sm font-bold text-white py-3 rounded-xl"
             style={{ background: `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})` }}>
-            Schedule Demo
+            Book A Demo
           </a>
         </div>
       )}
@@ -140,20 +138,19 @@ function Nav() {
 }
 
 /* ─────────────────────────────────────────────
-   HERO
+   1. HERO SECTION (Updated Content)
 ───────────────────────────────────────────── */
 function HeroDashboard() {
-  const channels = ["LinkedIn", "Twitter", "Facebook", "Instagram"];
   const queue = [
-    { channel: "LinkedIn", text: "Q3 Drug Launch: Expanding our oncology portfolio...", badge: "MLR Approved", badgeColor: "#09A99E", dot: "#09A99E" },
-    { channel: "Twitter", text: "Join us at BIO International2026 — booth #1204...", badge: "Legal Review", badgeColor: "#3B82F6", dot: "#3B82F6" },
-    { channel: "Facebook", text: "Patient support program: 3 million patients served...", badge: "Pending MLR", badgeColor: "#F59E0B", dot: "#F59E0B" },
-    { channel: "LinkedIn", text: "MarketBeam named G2 Leader for compliance...", badge: "Scheduled", badgeColor: "#8B5CF6", dot: "#8B5CF6" },
+    { channel: "LinkedIn", text: "Q3 Clinical Study Results: Multi-center trial shows positive endpoints...", badge: "MLR Approved", badgeColor: "#09A99E", dot: "#09A99E" },
+    { channel: "Twitter / X", text: "Join our healthcare symposium live stream at 2 PM EST...", badge: "AI Prechecked", badgeColor: "#3B82F6", dot: "#3B82F6" },
+    { channel: "Facebook", text: "Patient advocacy initiatives expanding to 5 new regions...", badge: "Pending Review", badgeColor: "#F59E0B", dot: "#F59E0B" },
+    { channel: "LinkedIn", text: "Veeva PromoMats cleared campaign launching across global teams...", badge: "Scheduled", badgeColor: "#8B5CF6", dot: "#8B5CF6" },
   ];
   return (
     <div className="relative rounded-[20px] shadow-[0_32px_80px_rgba(0,0,0,0.28)] overflow-hidden border border-white/10"
       style={{ background: "linear-gradient(160deg, #0F172A 0%, #152030 100%)" }}>
-      {/* Browser chrome */}
+      {/* Chrome header */}
       <div className="flex items-center gap-1.5 px-4 pt-3.5 pb-3 border-b border-white/[0.07]">
         <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
         <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
@@ -161,20 +158,17 @@ function HeroDashboard() {
         <div className="flex-1 mx-3 h-[22px] rounded-md flex items-center px-2.5 gap-1.5"
           style={{ background: "rgba(255,255,255,0.06)" }}>
           <Lock className="w-2.5 h-2.5 text-emerald-400/70" />
-          <span className="text-[10px] text-white/30 font-mono">app.marketbeam.ai/publish</span>
+          <span className="text-[10px] text-white/30 font-mono">app.marketbeam.ai/compliance-hub</span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="w-5 h-5 rounded flex items-center justify-center hover:bg-white/10 cursor-pointer">
-            <RefreshCcw className="w-2.5 h-2.5 text-white/30" />
-          </div>
+          <RefreshCcw className="w-2.5 h-2.5 text-white/30" />
         </div>
       </div>
 
-      {/* App layout */}
-      <div className="flex" style={{ minHeight: 360 }}>
-        {/* Sidebar */}
+      {/* Main app preview */}
+      <div className="flex" style={{ minHeight: 350 }}>
         <div className="w-12 border-r border-white/[0.06] flex flex-col items-center py-4 gap-3">
-          {[LayoutDashboard, Calendar, Users, BarChart3, Eye, Settings].map((Icon, i) => (
+          {[Layers, Calendar, Users, BarChart3, Eye, Settings].map((Icon, i) => (
             <div key={i} className={cn(
               "w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors",
               i === 0 ? "bg-[#09A99E]/20" : "hover:bg-white/5"
@@ -184,30 +178,24 @@ function HeroDashboard() {
           ))}
         </div>
 
-        {/* Main */}
         <div className="flex-1 p-4 overflow-hidden">
-          {/* Top bar */}
           <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-white text-sm font-bold leading-none mb-1">Content Publishing</div>
-              <div className="text-white/35 text-[10px]">Pharma Division · Q3 Campaign</div>
+              <div className="text-white text-sm font-bold leading-none mb-1">Compliance & Social Hub</div>
+              <div className="text-white/35 text-[10px]">Life Sciences & Financial Enterprise Division</div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1.5 rounded-full border border-[#09A99E]/30"
-                style={{ color: TEAL, background: "rgba(9,169,158,0.12)" }}>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#09A99E] animate-pulse" />
-                Compliance Active
-              </div>
+            <div className="flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1 rounded-full border border-[#09A99E]/30 text-[#09A99E] bg-[#09A99E]/10">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#09A99E] animate-pulse" />
+              AI Precheck Active
             </div>
           </div>
 
-          {/* KPI row */}
           <div className="grid grid-cols-4 gap-2 mb-4">
             {[
-              { label: "Published", value: "1,247", color: TEAL },
-              { label: "In Review", value: "38", color: "#3B82F6" },
-              { label: "Compliance", value: "99.4%", color: "#10B981" },
-              { label: "Reach", value: "2.8M", color: "#8B5CF6" },
+              { label: "Approved Posts", value: "1,420", color: TEAL },
+              { label: "In MLR Review", value: "24", color: "#3B82F6" },
+              { label: "Compliance Rate", value: "100%", color: "#10B981" },
+              { label: "AE Alerts", value: "0 Active", color: "#8B5CF6" },
             ].map(k => (
               <div key={k.label} className="rounded-xl p-2.5 border border-white/[0.07]"
                 style={{ background: "rgba(255,255,255,0.04)" }}>
@@ -217,23 +205,19 @@ function HeroDashboard() {
             ))}
           </div>
 
-          {/* Approval queue */}
           <div className="rounded-xl border border-white/[0.07] overflow-hidden mb-3"
             style={{ background: "rgba(255,255,255,0.03)" }}>
             <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06]">
               <div className="flex items-center gap-2">
                 <ClipboardList className="w-3 h-3 text-white/40" />
-                <span className="text-[10px] font-bold text-white/60 uppercase tracking-wider">Approval Queue</span>
+                <span className="text-[10px] font-bold text-white/60 uppercase tracking-wider">Governed Workflow Queue</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Filter className="w-2.5 h-2.5 text-white/30" />
-                <span className="text-[9px] text-white/30">4 items</span>
-              </div>
+              <span className="text-[9px] text-white/30">Veeva & MLR Synced</span>
             </div>
             {queue.map((item, i) => (
-              <div key={i} className="flex items-center gap-3 px-3 py-2.5 border-b border-white/[0.04] last:border-0 hover:bg-white/[0.03] transition-colors">
+              <div key={i} className="flex items-center gap-3 px-3 py-2 border-b border-white/[0.04] last:border-0">
                 <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: item.dot }} />
-                <div className="w-14 text-[9px] font-bold text-white/30 flex-shrink-0">{item.channel}</div>
+                <div className="w-16 text-[9px] font-bold text-white/30 flex-shrink-0">{item.channel}</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[10px] text-white/55 truncate">{item.text}</div>
                 </div>
@@ -244,31 +228,6 @@ function HeroDashboard() {
               </div>
             ))}
           </div>
-
-          {/* Sparkline */}
-          <div className="flex items-center gap-1.5">
-            <div className="text-[9px] text-white/25 font-mono w-8">Posts</div>
-            <div className="flex-1 flex items-end gap-[2px] h-8">
-              {[22, 38, 28, 55, 42, 68, 51, 78, 62, 84, 71, 90, 78, 95].map((h, i) => (
-                <div key={i} className="flex-1 rounded-[2px] transition-all"
-                  style={{
-                    height: `${h}%`,
-                    background: i >= 10
-                      ? `linear-gradient(180deg, ${TEAL}, ${TEAL_DARK})`
-                      : "rgba(255,255,255,0.1)"
-                  }} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* AI badge overlay */}
-      <div className="absolute top-14 -right-3 bg-gradient-to-br from-violet-600 to-purple-700 rounded-xl px-3 py-2 shadow-xl hidden xl:flex items-center gap-2">
-        <Sparkles className="w-3.5 h-3.5 text-white" />
-        <div>
-          <div className="text-[10px] font-bold text-white leading-none">AI Writing</div>
-          <div className="text-[9px] text-white/60">Generating...</div>
         </div>
       </div>
     </div>
@@ -277,120 +236,504 @@ function HeroDashboard() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 pb-16 sm:pb-24 overflow-hidden">
-      {/* Layered background */}
+    <section className="relative min-h-[85vh] flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
       <div className="absolute inset-0 -z-20"
         style={{ background: "linear-gradient(160deg, #F0FDFC 0%, #F8FAFC 45%, #EFF6FF 100%)" }} />
-      {/* Grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-[0.025]"
         style={{
           backgroundImage: "linear-gradient(#09A99E 1px, transparent 1px), linear-gradient(90deg, #09A99E 1px, transparent 1px)",
           backgroundSize: "48px 48px"
         }} />
-      {/* Glow blobs */}
       <div className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full -z-10"
         style={{ background: "radial-gradient(circle, rgba(9,169,158,0.18) 0%, transparent 65%)" }} />
-      <div className="absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full -z-10"
-        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-12 xl:gap-20 items-center">
-
-          {/* ── Left copy ── */}
+        <div className="grid lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-12 xl:gap-16 items-center">
+          {/* Left content */}
           <div className="max-w-xl">
-            {/* Pill badge */}
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-7 border"
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-5 border"
               style={{ color: TEAL, borderColor: `${TEAL}35`, background: `${TEAL}0f` }}>
-              <Sparkles className="w-3 h-3" />
-              AI-Powered Compliance Platform · Enterprise Grade
+              <Sparkles className="w-3.5 h-3.5" />
+              AI-Powered Social Media Management & Compliance
             </div>
 
-            <h1 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.75rem] xl:text-[3.35rem] font-extrabold leading-[1.15] sm:leading-[1.08] tracking-tight text-slate-900 mb-4 sm:mb-6"
+            {/* H1 */}
+            <h1 className="text-[1.8rem] sm:text-[2.4rem] lg:text-[2.7rem] xl:text-[3.1rem] font-extrabold leading-[1.12] tracking-tight text-slate-900 mb-4"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.03em" }}>
-              The Enterprise Social Media Platform for{" "}
-              <span className="relative inline-block">
-                <span style={{ color: TEAL }}>Regulated Industries</span>
-                <svg className="absolute -bottom-2 left-0 w-full" height="6" viewBox="0 0 200 6" preserveAspectRatio="none">
-                  <path d="M0 5 Q50 0 100 4 Q150 8 200 3" stroke={TEAL} strokeWidth="2.5" fill="none" opacity="0.5" strokeLinecap="round" />
-                </svg>
-              </span>
+              Social Media Management Built for{" "}
+              <span style={{ color: TEAL }}>Regulated Industries</span>
             </h1>
 
-            <p className="text-[0.9rem] sm:text-[1rem] lg:text-[1.075rem] text-slate-500 leading-[1.6] sm:leading-[1.75] mb-6 sm:mb-9 px-2 sm:px-0">
-              Publish, amplify, monitor, analyze, and manage compliant social media at scale with one AI-powered platform built for life sciences, financial services, and enterprise teams.
+            {/* Description */}
+            <p className="text-[0.95rem] sm:text-[1.025rem] text-slate-600 leading-[1.65] mb-6">
+              MarketBeam helps life sciences, financial services, and enterprise teams create, review, approve, publish, monitor, and measure social media content while maintaining compliance across every workflow.
             </p>
 
-            {/* CTA row */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-10">
+            {/* Primary CTA */}
+            <div className="flex flex-col sm:flex-row gap-3.5 mb-6">
               <a href="#demo"
-                className="group inline-flex items-center justify-center gap-2 text-[13px] sm:text-[14px] lg:text-[15px] font-bold text-white px-5 sm:px-6 lg:px-7 py-[12px] sm:py-[13px] lg:py-[14px] rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 text-[14px] sm:text-[15px] font-bold text-white px-7 py-3 rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
                 style={{ background: `linear-gradient(135deg, ${TEAL} 0%, ${TEAL_DARK} 100%)` }}>
-                Schedule Demo
+                Book A Demo
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </a>
-              <a href="#tour"
-                className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-slate-700 px-7 py-[14px] rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm transition-all duration-200">
-                <span className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: `${TEAL}18` }}>
-                  <Play className="w-3 h-3 fill-current" style={{ color: TEAL }} />
-                </span>
-                Watch Product Tour
               </a>
             </div>
 
-            {/* Compliance chips */}
-            <div className="flex flex-wrap gap-2.5">
+            {/* 3 Supporting Points - Horizontal Compact Row */}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 border-t border-slate-200/60">
               {[
-                { icon: ShieldCheck, label: "HIPAA" },
-                { icon: Lock, label: "SOC 2 Type II" },
-                { icon: FileText, label: "FINRA Ready" },
-                { icon: Shield, label: "FDA Supported" },
-                { icon: Globe, label: "GDPR Compliant" },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label}
-                  className="flex items-center gap-1.5 text-[11.5px] font-semibold text-slate-500 px-3 py-1.5 rounded-lg bg-white border border-slate-100 shadow-sm">
-                  <Icon className="w-3 h-3 flex-shrink-0" style={{ color: TEAL }} />
-                  {label}
+                "Built-in MLR & approval workflows",
+                "AI-powered compliance precheck",
+                "Audit-ready publishing and reporting"
+              ].map(point => (
+                <div key={point} className="flex items-center gap-2 text-[12.5px] font-semibold text-slate-700">
+                  <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${TEAL}18` }}>
+                    <Check className="w-3 h-3" style={{ color: TEAL }} />
+                  </div>
+                  <span>{point}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Right illustration ── */}
+          {/* Right Dashboard Visual */}
           <div className="relative lg:ml-4">
             <HeroDashboard />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-            {/* Floating cards */}
-            <div className="absolute -left-10 top-1/3 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-slate-100 p-3.5 hidden xl:flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `${TEAL}18` }}>
-                <ShieldCheck className="w-5 h-5" style={{ color: TEAL }} />
+/* ─────────────────────────────────────────────
+   2. BUSINESS RESULTS SECTION (Copy Updated)
+───────────────────────────────────────────── */
+function StatCard({ end, suffix = "", decimals = 0, label, sub, icon: Icon }: {
+  end: number; suffix?: string; decimals?: number;
+  label: string; sub: string; icon: React.ElementType;
+}) {
+  const { count, ref } = useCountUp(end, 2200, decimals);
+  return (
+    <div ref={ref}
+      className="group text-center rounded-2xl border border-slate-100 bg-white p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform"
+        style={{ background: `${TEAL}12` }}>
+        <Icon className="w-6 h-6" style={{ color: TEAL }} />
+      </div>
+      <div className="text-[2.5rem] font-extrabold leading-none mb-2"
+        style={{ color: TEAL, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        {decimals > 0 ? count.toFixed(decimals) : Math.round(count)}{suffix}
+      </div>
+      <div className="text-[14px] font-bold text-slate-800 mb-1.5">{label}</div>
+      <div className="text-[12px] text-slate-500 font-medium leading-relaxed">{sub}</div>
+    </div>
+  );
+}
+
+function StatsSection() {
+  return (
+    <section className="py-20 bg-white border-y border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-[1.75rem] sm:text-[2.2rem] font-extrabold text-slate-900 mb-3"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Proven Business Results
+          </h2>
+          <p className="text-[1rem] text-slate-500 max-w-xl mx-auto">
+            Measurable impact reported by organizations using MarketBeam.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard end={60} suffix="%" label="60% Faster Review Cycles" sub="Automate approvals and reduce manual compliance handoffs." icon={Zap} />
+          <StatCard end={90} suffix="%" label="90% Lower Compliance Risk" sub="Identify potential issues before content reaches publishing." icon={ShieldCheck} />
+          <StatCard end={3} suffix="X" label="3X More Efficient Teams" sub="Manage publishing, approvals, monitoring, and advocacy from one platform." icon={Users} />
+          <StatCard end={2.5} suffix="X" decimals={1} label="2.5X Higher Social Media ROI" sub="Turn compliant social engagement into measurable business impact." icon={TrendingUp} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   3. INDUSTRIES SECTION (Updated Content)
+───────────────────────────────────────────── */
+const INDUSTRIES = [
+  {
+    icon: FlaskConical, color: TEAL, bg: "#f0fdfc",
+    title: "Life Sciences",
+    desc: "Manage social publishing, MLR review, Veeva workflows, adverse-event monitoring, and audit readiness across pharma, biotech, and medtech teams.",
+    cta: "Explore Life Sciences →",
+  },
+  {
+    icon: Landmark, color: "#3B82F6", bg: "#eff6ff",
+    title: "Financial Services",
+    desc: "Manage governed social publishing with approval workflows, recordkeeping, and compliance controls for regulated financial organizations.",
+    cta: "Explore Financial Services →",
+  },
+  {
+    icon: Building2, color: "#8B5CF6", bg: "#f5f3ff",
+    title: "Enterprise Teams",
+    desc: "Coordinate global teams, brands, and social channels with centralized workflows, permissions, and governance.",
+    cta: "Explore Enterprise →",
+  },
+];
+
+function IndustriesSection() {
+  return (
+    <section id="industries" className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-4 border bg-white"
+            style={{ color: TEAL, borderColor: `${TEAL}30` }}>
+            <Building2 className="w-3.5 h-3.5" /> Regulated Industry Solutions
+          </div>
+          <h2 className="text-[1.75rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Built for Industries Where Compliance Matters
+          </h2>
+          <p className="text-[1rem] text-slate-500 max-w-xl mx-auto">
+            Purpose-configured compliance guardrails tailored to your regulatory requirements.
+          </p>
+        </div>
+
+        {/* 3 Industry Layout */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {INDUSTRIES.map(ind => {
+            const Icon = ind.icon;
+            return (
+              <div key={ind.title}
+                className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110"
+                    style={{ background: ind.bg }}>
+                    <Icon className="w-7 h-7" style={{ color: ind.color }} />
+                  </div>
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-3"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {ind.title}
+                  </h3>
+                  <p className="text-[14px] text-slate-500 leading-relaxed mb-6">
+                    {ind.desc}
+                  </p>
+                </div>
+                <a href="#demo" className="inline-flex items-center gap-1.5 text-xs font-bold transition-colors group-hover:translate-x-1 duration-200 mt-auto pt-4 border-t border-slate-100"
+                  style={{ color: ind.color }}>
+                  {ind.cta}
+                </a>
               </div>
-              <div>
-                <div className="text-xs font-bold text-slate-800 leading-tight">MLR Approved</div>
-                <div className="text-[10px] text-slate-400">Post cleared for publishing</div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   4. PLATFORM SECTION (Updated Content & 6 Capabilities)
+───────────────────────────────────────────── */
+const PLATFORM_CAPABILITIES = [
+  {
+    icon: Calendar, color: TEAL, lightBg: "#f0fdfc",
+    label: "Social Media Publishing",
+    desc: "Plan, create, approve, and publish compliant content across multiple social channels from one centralized platform.",
+  },
+  {
+    icon: Users, color: "#3B82F6", lightBg: "#eff6ff",
+    label: "Employee Advocacy",
+    desc: "Help employees safely share approved content with AI personalization, controlled sharing, and measurable advocacy programs.",
+  },
+  {
+    icon: BarChart3, color: "#8B5CF6", lightBg: "#f5f3ff",
+    label: "Social Analytics",
+    desc: "Measure content, campaign, advocacy, and channel performance with centralized analytics and reporting.",
+  },
+  {
+    icon: Eye, color: "#F59E0B", lightBg: "#fffbeb",
+    label: "Social Monitoring & AE Management",
+    desc: "Monitor conversations, detect potential adverse events, manage approved responses, and route risks to the appropriate teams.",
+  },
+  {
+    icon: Zap, color: "#EC4899", lightBg: "#fdf2f8",
+    label: "Compliant Paid Ads",
+    desc: "Create, review, approve, and launch governed paid social campaigns through compliant workflows.",
+  },
+  {
+    icon: Target, color: "#EF4444", lightBg: "#fff1f2",
+    label: "Prospect Intelligence",
+    desc: "Connect social engagement with CRM data to identify prospects, understand buying signals, and support sales teams.",
+  },
+];
+
+function PlatformSection() {
+  return (
+    <section id="platform" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
+            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
+            <Layers className="w-3.5 h-3.5" /> THE MARKETBEAM PLATFORM
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] lg:text-[2.8rem] font-extrabold text-slate-900 mb-5 leading-tight"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Manage the Complete Social Media Lifecycle
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            From content creation and compliance review to publishing, monitoring, employee advocacy, paid campaigns, analytics, and sales intelligence — manage everything from one governed platform.
+          </p>
+        </div>
+
+        {/* 6 Capabilities Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          {PLATFORM_CAPABILITIES.map((cap) => {
+            const Icon = cap.icon;
+            return (
+              <div key={cap.label}
+                className="bg-slate-50/70 rounded-2xl border border-slate-200/70 p-7 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                    style={{ background: cap.lightBg }}>
+                    <Icon className="w-6 h-6" style={{ color: cap.color }} />
+                  </div>
+                  <h3 className="text-lg font-extrabold text-slate-900 mb-3"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {cap.label}
+                  </h3>
+                  <p className="text-[13.5px] text-slate-500 leading-relaxed mb-6">
+                    {cap.desc}
+                  </p>
+                </div>
               </div>
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-1" />
+            );
+          })}
+        </div>
+
+        {/* Section CTA */}
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-sm font-bold text-white px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
+            style={{ background: `linear-gradient(135deg, ${TEAL} 0%, ${TEAL_DARK} 100%)` }}>
+            Explore the Platform <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   5. NEW SECTION: VEEVA + MLR WORKFLOW
+───────────────────────────────────────────── */
+function VeevaWorkflowSection() {
+  const veevaLogo = "https://www.vectorlogo.zone/logos/veeva/veeva-icon.svg";
+
+  const workflowSteps = [
+    { num: "01", title: "Create", sub: "Draft social content with AI assistance.", icon: Cpu, color: TEAL },
+    { num: "02", title: "AI Precheck", sub: "Automated scan for compliance risks.", icon: ShieldAlert, color: "#3B82F6" },
+    { num: "03", title: "MLR Review", sub: "Routing to Medical, Legal, & Regulatory.", icon: GitBranch, color: "#8B5CF6" },
+    { num: "04", title: "Veeva PromoMats", sub: "Native Vault approval & asset sync.", logo: veevaLogo, color: "#F47721" },
+    { num: "05", title: "Approve", sub: "Final sign-off across global teams.", icon: CheckCircle2, color: "#10B981" },
+    { num: "06", title: "Publish", sub: "Scheduled multi-channel publishing.", icon: Globe, color: "#EC4899" },
+    { num: "07", title: "Monitor", sub: "24/7 AI adverse event detection.", icon: Eye, color: "#EF4444" },
+    { num: "08", title: "Audit Trail", sub: "Immutable regulatory compliance log.", icon: Archive, color: "#84CC16" },
+  ];
+
+  return (
+    <section className="py-24 bg-slate-900 text-white relative overflow-hidden" id="compliance">
+      {/* Glow backgrounds */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 relative z-10">
+        {/* Section Header with Veeva Logo Badge */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.15em] px-4 py-2 rounded-full mb-6 border border-orange-500/40 bg-slate-800/90 text-orange-400 shadow-md">
+            <div className="w-5 h-5 rounded flex items-center justify-center bg-white p-0.5 shadow-sm">
+              <img src={veevaLogo} alt="Veeva" className="w-full h-full object-contain" />
+            </div>
+            <span>VEEVA PROMOMATS INTEGRATION</span>
+          </div>
+          <h2 className="text-[2rem] lg:text-[2.8rem] font-extrabold text-white mb-5 leading-tight tracking-tight"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Connect Social Media Directly to Your MLR Workflow
+          </h2>
+          <p className="text-[1.05rem] text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Move social content through review and approval without disconnected manual processes. MarketBeam connects creation, compliance precheck, MLR review, approval, publishing, monitoring, and audit history in one governed workflow.
+          </p>
+        </div>
+
+        {/* Integration Architecture Card */}
+        <div className="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 lg:p-8 shadow-2xl mb-12 backdrop-blur-sm">
+          {/* Top Banner: MarketBeam <-> Veeva PromoMats */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-700/60">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* MarketBeam Logo Card */}
+              <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-md h-10">
+                <img src="https://marketbeam.io/wp-content/uploads/2024/10/Untitled-design-15-2.png" alt="MarketBeam" className="h-6 object-contain" />
+              </div>
+
+              <span className="text-teal-400 text-sm font-black px-1">⟷</span>
+
+              {/* Native API Integration Badge */}
+              <span className="text-teal-300 text-xs font-mono font-extrabold px-3 py-2 rounded-xl bg-teal-500/15 border border-teal-500/40 flex items-center gap-1.5 shadow-sm">
+                <Zap className="w-3.5 h-3.5 text-teal-400" />
+                <span>Native API Integration</span>
+              </span>
+
+              <span className="text-teal-400 text-sm font-black px-1">⟷</span>
+
+              {/* Veeva Vault PromoMats Logo Card */}
+              <div className="flex items-center gap-2.5 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-md h-10">
+                <img src={veevaLogo} alt="Veeva PromoMats" className="w-6 h-6 object-contain" />
+                <span className="text-xs font-extrabold text-slate-900 tracking-tight">Veeva Vault PromoMats</span>
+              </div>
             </div>
 
-            <div className="absolute -right-8 top-12 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-slate-100 p-3.5 hidden xl:flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-violet-50">
-                <TrendingUp className="w-5 h-5 text-violet-600" />
-              </div>
-              <div>
-                <div className="text-xs font-bold text-slate-800">+400× Reach</div>
-                <div className="text-[10px] text-slate-400">via Employee Advocacy</div>
-              </div>
+            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-2 rounded-full shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Bidirectional Vault Sync Active</span>
             </div>
+          </div>
 
-            <div className="absolute -right-6 bottom-16 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-slate-100 p-3.5 hidden xl:flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-amber-50">
-                <Bell className="w-5 h-5 text-amber-500" />
+          {/* 8 Workflow Step Cards Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {workflowSteps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.num}
+                  className="bg-slate-900/90 border border-slate-700/70 hover:border-teal-500/50 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      {step.logo ? (
+                        <img src={step.logo} alt={step.title} className="w-10 h-10 rounded-xl object-contain p-1.5 bg-white border border-slate-700 group-hover:scale-110 transition-transform" />
+                      ) : Icon ? (
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800 border border-slate-700 group-hover:scale-110 transition-transform">
+                          <Icon className="w-5 h-5" style={{ color: step.color }} />
+                        </div>
+                      ) : null}
+                      <span className="text-[11px] font-black px-2.5 py-0.5 rounded bg-slate-800 text-teal-400 border border-slate-700">
+                        {step.num}
+                      </span>
+                    </div>
+
+                    <h3 className="text-sm font-bold text-white mb-1.5 group-hover:text-teal-400 transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="text-[11.5px] text-slate-400 leading-relaxed">
+                      {step.sub}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[10.5px] font-semibold text-slate-400">
+                    <span>Stage {step.num}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-teal-400 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Action & Trust Highlights */}
+        <div className="flex flex-wrap items-center justify-center gap-8 text-xs font-semibold text-slate-300">
+          {[
+            "Direct Veeva Vault Sync",
+            "Automated MLR Routing",
+            "Immutable Audit Trail",
+            "21 CFR Part 11 Compliant"
+          ].map(item => (
+            <div key={item} className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-teal-400" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <a href="#demo" className="inline-flex items-center gap-2 text-sm font-bold text-white px-8 py-3.5 rounded-xl shadow-lg transition-all hover:shadow-teal-500/20"
+            style={{ background: `linear-gradient(135deg, ${TEAL} 0%, ${TEAL_DARK} 100%)` }}>
+            Explore Compliance Workflows <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   6. AI SECTION (Updated Content)
+───────────────────────────────────────────── */
+function AISection() {
+  const steps = [
+    { label: "Create", desc: "Create and adapt social content.", color: TEAL },
+    { label: "AI Precheck", desc: "Identify potential policy, regulatory, and disclosure issues.", color: "#3B82F6" },
+    { label: "Review", desc: "Help reviewers focus on higher-risk content first.", color: "#8B5CF6" },
+    { label: "Approve & Publish", desc: "Publish approved content through governed workflows.", color: "#10B981" },
+  ];
+
+  const issueList = [
+    { label: "High-risk language", icon: AlertTriangle, color: "text-amber-500" },
+    { label: "Potential policy violations", icon: ClipboardList, color: "text-rose-500" },
+    { label: "Unapproved claims", icon: CheckSquare, color: "text-red-500" },
+    { label: "Missing disclosures", icon: Eye, color: "text-blue-500" },
+    { label: "Outdated information", icon: Calendar, color: "text-purple-[#8B5CF6]" },
+    { label: "Potential compliance risks", icon: ShieldAlert, color: "text-teal-600" },
+  ];
+
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
+            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
+            <Cpu className="w-3.5 h-3.5" /> AI FOR REGULATED SOCIAL MEDIA
+          </div>
+          <h2 className="text-[2rem] lg:text-[2.6rem] font-extrabold text-slate-900 mb-5 leading-tight"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            AI That Helps Teams Create Faster and Review Smarter
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            MarketBeam uses AI to support content creation and compliance review while keeping human oversight at the center of regulated workflows.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Workflow Steps */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-slate-900 mb-6">Governed AI Creation & Review Flow</h3>
+            {steps.map((st, i) => (
+              <div key={st.label} className="bg-slate-50 rounded-2xl p-5 border border-slate-100 flex items-start gap-4">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-extrabold text-xs flex-shrink-0"
+                  style={{ background: st.color }}>
+                  {i + 1}
+                </div>
+                <div>
+                  <div className="text-base font-extrabold text-slate-900 mb-1">{st.label}</div>
+                  <div className="text-xs text-slate-500 leading-relaxed">{st.desc}</div>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-bold text-slate-800">Adverse Event</div>
-                <div className="text-[10px] text-slate-400">AI flagged — reviewing</div>
-              </div>
+            ))}
+          </div>
+
+          {/* AI Precheck Issues List */}
+          <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200/80">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 uppercase tracking-wider mb-6">
+              <ShieldAlert className="w-4 h-4 text-amber-500" />
+              Automated AI Precheck Detects:
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {issueList.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="flex items-center gap-2.5 text-xs font-bold text-slate-700 bg-white p-3.5 rounded-xl border border-slate-100 shadow-sm">
+                    <Icon className={cn("w-4 h-4 flex-shrink-0", item.color)} />
+                    <span>{item.label}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -400,7 +743,642 @@ function HeroSection() {
 }
 
 /* ─────────────────────────────────────────────
-   TRUSTED BY
+   7. NEW SECTION: SOCIAL MONITORING
+───────────────────────────────────────────── */
+function SocialMonitoringSection() {
+  const flow = ["Detect", "Review", "Respond", "Document"];
+
+  return (
+    <section className="py-24 bg-slate-50 border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-white text-amber-600 border-amber-200">
+            <Eye className="w-3.5 h-3.5" /> RISK & ADVERSE EVENT MANAGEMENT
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Turn Social Monitoring Into a Compliance Workflow
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 leading-relaxed">
+            Identify important social activity before it becomes a regulatory risk. Detect potential adverse events, route activity to compliance or pharmacovigilance teams, manage governed responses, and maintain centralized records.
+          </p>
+        </div>
+
+        {/* Workflow */}
+        <div className="flex flex-wrap justify-center items-center gap-4 mb-10">
+          {flow.map((item, idx) => (
+            <div key={item} className="flex items-center gap-4">
+              <div className="bg-white rounded-xl border border-slate-200 px-6 py-3.5 text-sm font-bold text-slate-800 shadow-sm">
+                {item}
+              </div>
+              {idx < flow.length - 1 && (
+                <ChevronRight className="w-4 h-4 text-slate-400 hidden sm:block" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Social Monitoring <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   8. NEW SECTION: COMPLIANT PAID ADS
+───────────────────────────────────────────── */
+function PaidAdsSection() {
+  const steps = ["Create", "Review", "Approve", "Launch"];
+
+  return (
+    <section className="py-24 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-pink-50 text-pink-600 border-pink-200">
+            <Zap className="w-3.5 h-3.5" /> GOVERNED PAID SOCIAL CAMPAIGNS
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Bring Compliance Into Paid Social Campaigns
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 leading-relaxed">
+            Create and manage paid social campaigns without separating advertising from your compliance workflow. Review campaign content, maintain approved versions, and move approved campaigns into supported advertising platforms.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-4 mb-10">
+          {steps.map((item, idx) => (
+            <div key={item} className="flex items-center gap-4">
+              <div className="bg-slate-50 rounded-xl border border-slate-200 px-6 py-3.5 text-sm font-bold text-slate-800">
+                {item}
+              </div>
+              {idx < steps.length - 1 && (
+                <ChevronRight className="w-4 h-4 text-slate-400 hidden sm:block" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Ads Manager Integration <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   9. NEW SECTION: EMPLOYEE ADVOCACY
+───────────────────────────────────────────── */
+function EmployeeAdvocacySection() {
+  const highlights = [
+    "Approved Content Library",
+    "AI Personalization",
+    "Controlled Sharing",
+    "Campaign Management",
+    "Advocacy Analytics",
+    "Employee Engagement"
+  ];
+
+  return (
+    <section className="py-24 bg-slate-50 border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-blue-50 text-blue-600 border-blue-200">
+            <Users className="w-3.5 h-3.5" /> EMPLOYEE ADVOCACY
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Turn Employees Into Trusted Brand Advocates
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 leading-relaxed">
+            Give employees an easier way to share approved brand content while marketing teams maintain control over messaging, compliance, and performance.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
+          {highlights.map(item => (
+            <div key={item} className="bg-white rounded-xl p-4 border border-slate-200/80 flex items-center gap-3 shadow-sm">
+              <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0" />
+              <span className="text-xs font-bold text-slate-800">{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Employee Advocacy <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   10. NEW SECTION: PROSPECT INTELLIGENCE
+───────────────────────────────────────────── */
+function ProspectIntelligenceSection() {
+  const steps = [
+    "Social Engagement",
+    "Prospect Identification",
+    "CRM Intelligence",
+    "Sales Follow-Up"
+  ];
+
+  return (
+    <section className="py-24 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-red-50 text-red-600 border-red-200">
+            <Target className="w-3.5 h-3.5" /> PROSPECT INTELLIGENCE
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Turn Social Engagement Into Sales Intelligence
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 leading-relaxed">
+            Identify prospects engaging with social content and connect those interactions with CRM data to give sales teams stronger context and buying signals.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-4 mb-10">
+          {steps.map((item, idx) => (
+            <div key={item} className="flex items-center gap-4">
+              <div className="bg-slate-50 rounded-xl border border-slate-200 px-6 py-3.5 text-sm font-bold text-slate-800">
+                {item}
+              </div>
+              {idx < steps.length - 1 && (
+                <ChevronRight className="w-4 h-4 text-slate-400 hidden sm:block" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Prospect Intelligence <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   11. INTEGRATIONS SECTION (Updated Content with Logos)
+───────────────────────────────────────────── */
+const INTEGRATIONS_LIST = [
+  { name: "LinkedIn", cat: "Social Network", color: "#0A66C2", logo: "https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" },
+  { name: "Facebook", cat: "Social Network", color: "#1877F2", logo: "https://cdn.simpleicons.org/facebook/1877F2" },
+  { name: "Instagram", cat: "Social Network", color: "#E4405F", logo: "https://cdn.simpleicons.org/instagram/E4405F" },
+  { name: "X", cat: "Social Network", color: "#000000", logo: "https://cdn.simpleicons.org/x/000000" },
+  { name: "TikTok", cat: "Social Network", color: "#000000", logo: "https://cdn.simpleicons.org/tiktok/000000" },
+  { name: "YouTube", cat: "Video Platform", color: "#FF0000", logo: "https://cdn.simpleicons.org/youtube/FF0000" },
+  { name: "Reddit", cat: "Community", color: "#FF4500", logo: "https://cdn.simpleicons.org/reddit/FF4500" },
+  { name: "Veeva PromoMats", cat: "MLR & Compliance", color: "#F47721", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLpyeI6CkQSisxZqpK1sUQ9pGXJpSmjwxwiDhQoMSDLQ&s=10" },
+  { name: "HubSpot", cat: "CRM & Marketing", color: "#FF7A59", logo: "https://cdn.simpleicons.org/hubspot/FF7A59" },
+  { name: "Slack", cat: "Collaboration", color: "#4A154B", logo: "https://www.vectorlogo.zone/logos/slack/slack-icon.svg" },
+  { name: "Google Analytics", cat: "Web Analytics", color: "#E37400", logo: "https://cdn.simpleicons.org/googleanalytics/E37400" },
+  { name: "LinkedIn Ads", cat: "Ad Manager", color: "#0A66C2", logo: "https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" },
+  { name: "Meta Ads", cat: "Ad Manager", color: "#0668E1", logo: "https://cdn.simpleicons.org/meta/0668E1" },
+];
+
+function IntegrationLogoCard({ intg }: { intg: typeof INTEGRATIONS_LIST[0] }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200/80 p-4 flex items-center gap-3.5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+      {intg.logo && !imgError ? (
+        <img
+          src={intg.logo}
+          alt={intg.name}
+          onError={() => setImgError(true)}
+          className="w-10 h-10 rounded-xl flex-shrink-0 object-contain p-1 border border-slate-100 bg-slate-50/50 shadow-sm"
+        />
+      ) : (
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-extrabold flex-shrink-0 shadow-sm"
+          style={{ background: intg.color }}>
+          {intg.name[0]}
+        </div>
+      )}
+      <div className="min-w-0">
+        <div className="text-[13px] font-bold text-slate-800 truncate">{intg.name}</div>
+        <div className="text-[10.5px] text-slate-400 font-semibold">{intg.cat}</div>
+      </div>
+    </div>
+  );
+}
+
+function IntegrationsSection() {
+  return (
+    <section id="integrations" className="py-24 bg-slate-50 border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-white"
+            style={{ color: TEAL, borderColor: `${TEAL}30` }}>
+            <Zap className="w-3.5 h-3.5" /> ENTERPRISE STACK INTEGRATIONS
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-5 leading-tight"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Connect MarketBeam With Your Existing Technology Stack
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Connect social networks, compliance systems, advertising platforms, collaboration tools, analytics, and CRM workflows.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
+          {INTEGRATIONS_LIST.map(intg => (
+            <IntegrationLogoCard key={intg.name} intg={intg} />
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Integrations <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   12. NEW SECTION: WHY MARKETBEAM
+───────────────────────────────────────────── */
+function WhyMarketBeamSection() {
+  const traditional = [
+    "Publishing-first",
+    "Separate compliance processes",
+    "Manual review handoffs",
+    "Disconnected MLR workflows",
+    "Basic social monitoring",
+    "Separate advocacy workflows",
+    "Limited regulatory context",
+  ];
+
+  const marketbeam = [
+    "Compliance-first social management",
+    "Integrated review workflows",
+    "Governed publishing",
+    "MLR workflow support",
+    "Social monitoring & AE management",
+    "Employee advocacy",
+    "Paid ads compliance",
+    "Audit-ready reporting",
+  ];
+
+  return (
+    <section className="py-24 bg-white border-t border-slate-100" id="why-marketbeam">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
+            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
+            <Award className="w-3.5 h-3.5" /> WHY MARKETBEAM
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Built Differently for Regulated Social Media
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Traditional Tools */}
+          <div className="bg-slate-50 rounded-2xl p-7 border border-slate-200/80">
+            <h3 className="text-base font-extrabold text-slate-500 uppercase tracking-wider mb-6 pb-4 border-b border-slate-200">
+              Traditional Social Media Tools
+            </h3>
+            <div className="space-y-3">
+              {traditional.map(item => (
+                <div key={item} className="flex items-center gap-2.5 text-xs font-semibold text-slate-500">
+                  <div className="w-2 h-2 rounded-full bg-slate-400 flex-shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* MarketBeam */}
+          <div className="bg-slate-900 rounded-2xl p-7 border border-teal-500/40 text-white shadow-xl">
+            <h3 className="text-base font-extrabold text-teal-400 uppercase tracking-wider mb-6 pb-4 border-b border-slate-800">
+              MarketBeam
+            </h3>
+            <div className="space-y-3">
+              {marketbeam.map(item => (
+                <div key={item} className="flex items-center gap-2.5 text-xs font-bold text-white">
+                  <Check className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   13. CUSTOMER PROOF SECTION (With Video Customer Reviews & Case Studies)
+───────────────────────────────────────────── */
+const CASE_STUDIES = [
+  {
+    industry: "Life Sciences", company: "Global Biotech Leader", color: TEAL,
+    challenge: "50-person MLR team manually reviewing every social post across 12 therapeutic areas — review cycles taking 3–4 weeks and delaying time-sensitive launches.",
+    solution: "MarketBeam automated MLR routing, version control, and audit trails, giving all reviewers a single workspace with AI pre-screening that flags issues before human review.",
+    results: ["67% faster MLR review cycles", "Zero compliance violations in 18 months", "Operational efficiency gains"],
+    author: "VP, Digital Strategy & Innovation",
+  },
+  {
+    industry: "Financial Services", company: "Top Investment Institution", color: "#3B82F6",
+    challenge: "Decentralized social media activity across financial advisors creating supervision gaps, archiving failures, and growing regulatory exposure.",
+    solution: "Deployed MarketBeam with compliant pre-approval workflows, real-time supervision dashboards, and content archiving across all channels.",
+    results: ["Compliant advisor communications", "Unified team management", "Increased approved content volume"],
+    author: "Chief Compliance Officer",
+  },
+  {
+    industry: "Pharmaceuticals", company: "Enterprise Pharma Organization", color: "#8B5CF6",
+    challenge: "Multiple global teams publishing content without centralized regulatory oversight, creating compliance risk and brand inconsistency.",
+    solution: "Global MarketBeam rollout with market-specific approval workflows, approved content libraries, and a centralized compliance dashboard.",
+    results: ["Global affiliates on one platform", "Reduction in unapproved content", "Unified compliance oversight"],
+    author: "Global Head of Digital, Corporate Affairs",
+  },
+];
+
+const VIDEO_REVIEWS = [
+  {
+    id: "video-1",
+    title: "Accelerating MLR Approvals in Life Sciences",
+    speaker: "VP, Digital Strategy & Innovation",
+    company: "Global Biotech Leader",
+    industry: "Life Sciences",
+    duration: "2:15",
+    thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    quote: "MarketBeam transformed our MLR process from our biggest bottleneck into a genuine competitive advantage.",
+  },
+  {
+    id: "video-2",
+    title: "100% FINRA Compliance Across Advisor Networks",
+    speaker: "Chief Compliance Officer",
+    company: "Top Investment Institution",
+    industry: "Financial Services",
+    duration: "1:45",
+    thumbnail: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+    quote: "We went from reactive compliance fire-fighting to proactive governance in under 90 days.",
+  },
+  {
+    id: "video-3",
+    title: "Governing Global Social Presence",
+    speaker: "Global Head of Digital",
+    company: "Enterprise Pharma Organization",
+    industry: "Pharmaceuticals",
+    duration: "3:10",
+    thumbnail: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+    quote: "For the first time, we have complete visibility and control over our global social presence in every market.",
+  }
+];
+
+function CaseStudiesSection() {
+  const [activeVideo, setActiveVideo] = useState<typeof VIDEO_REVIEWS[0] | null>(null);
+
+  return (
+    <section className="py-24 bg-slate-50 border-t border-slate-100" id="customer-proof">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-white"
+            style={{ color: TEAL, borderColor: `${TEAL}30` }}>
+            <Star className="w-3.5 h-3.5" /> CUSTOMER PROOF
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Trusted by Teams Managing Social Media at Scale
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            See how organizations use MarketBeam to improve social publishing, employee advocacy, compliance workflows, and digital engagement.
+          </p>
+        </div>
+
+        {/* Video Customer Reviews Sub-section */}
+        <div className="mb-16">
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-800 uppercase tracking-wider mb-6 justify-center">
+            <Video className="w-4 h-4 text-teal-600" />
+            <span>Video Customer Reviews</span>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {VIDEO_REVIEWS.map(video => (
+              <div key={video.id}
+                onClick={() => setActiveVideo(video)}
+                className="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                {/* Video Thumbnail with Play Button Overlay */}
+                <div className="relative h-48 overflow-hidden bg-slate-900">
+                  <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
+                  
+                  {/* Duration Badge */}
+                  <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border border-white/20">
+                    {video.duration}
+                  </div>
+
+                  {/* Play Icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-teal-500/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-teal-400 transition-all duration-300">
+                      <Play className="w-6 h-6 fill-white ml-0.5" />
+                    </div>
+                  </div>
+
+                  {/* Industry tag */}
+                  <div className="absolute bottom-3 left-3">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-white/20 backdrop-blur-md text-white border border-white/20">
+                      {video.industry}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 leading-snug mb-2 group-hover:text-teal-600 transition-colors">
+                      {video.title}
+                    </h3>
+                    <p className="text-[12px] italic text-slate-500 leading-relaxed mb-4">
+                      "{video.quote}"
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                      <div className="text-[11px] font-extrabold text-slate-800">{video.speaker}</div>
+                      <div className="text-[10px] text-slate-400 font-semibold">{video.company}</div>
+                    </div>
+                    <span className="text-xs font-bold text-teal-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      Watch <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Written Case Studies Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-10">
+          {CASE_STUDIES.map(cs => (
+            <div key={cs.company}
+              className="bg-white rounded-2xl border border-slate-200/80 p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2.5 mb-5">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg"
+                    style={{ color: cs.color, background: `${cs.color}15` }}>
+                    {cs.industry}
+                  </span>
+                  <span className="text-[12px] text-slate-400 font-semibold">{cs.company}</span>
+                </div>
+
+                <div className="mb-4">
+                  <div className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-slate-400 mb-1">Challenge</div>
+                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{cs.challenge}</p>
+                </div>
+
+                <div className="mb-4">
+                  <div className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-slate-400 mb-1">Solution</div>
+                  <p className="text-[12.5px] text-slate-600 leading-relaxed">{cs.solution}</p>
+                </div>
+
+                <div className="mb-6 pt-3 border-t border-slate-100">
+                  <div className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-slate-400 mb-2">Results</div>
+                  <div className="space-y-1.5">
+                    {cs.results.map(r => (
+                      <div key={r} className="flex items-center gap-2 text-[12px] font-bold text-slate-800">
+                        <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                        <span>{r}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-[11px] font-bold text-slate-500 pt-3 border-t border-slate-100">
+                — {cs.author}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Customer Stories <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+
+      {/* Video Modal Popup */}
+      {activeVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md"
+          onClick={() => setActiveVideo(null)}>
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative"
+            onClick={e => e.stopPropagation()}>
+            {/* Header */}
+            <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-bold text-teal-400">
+                <Video className="w-4 h-4" />
+                <span>Customer Video Review</span>
+              </div>
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Video Player Box */}
+            <div className="relative aspect-video bg-black flex items-center justify-center">
+              <img src={activeVideo.thumbnail} alt={activeVideo.title} className="w-full h-full object-cover opacity-60" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-teal-500 text-white flex items-center justify-center shadow-xl animate-pulse">
+                  <Play className="w-7 h-7 fill-white ml-1" />
+                </div>
+                <span className="text-xs font-bold text-white bg-slate-900/80 px-3 py-1 rounded-full border border-white/20">
+                  Video Review Playing · {activeVideo.duration}
+                </span>
+              </div>
+            </div>
+
+            {/* Footer details */}
+            <div className="p-6 bg-slate-900">
+              <h3 className="text-lg font-bold text-white mb-2">{activeVideo.title}</h3>
+              <p className="text-sm italic text-slate-300 leading-relaxed mb-4">"{activeVideo.quote}"</p>
+              <div className="flex items-center justify-between text-xs text-slate-400 pt-3 border-t border-slate-800">
+                <span className="font-bold text-white">{activeVideo.speaker}</span>
+                <span>{activeVideo.company} ({activeVideo.industry})</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   14. NEW SECTION: SECURITY & GOVERNANCE
+───────────────────────────────────────────── */
+function SecurityGovernanceSection() {
+  const highlights = [
+    "Role-based access",
+    "Approval controls",
+    "Audit trails",
+    "Governed publishing",
+    "Data protection",
+    "Enterprise permissions",
+    "Centralized administration"
+  ];
+
+  return (
+    <section className="py-24 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border bg-white"
+            style={{ color: TEAL, borderColor: `${TEAL}30` }}>
+            <ShieldCheck className="w-3.5 h-3.5" /> SECURITY & COMPLIANCE
+          </div>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Enterprise Governance for Regulated Teams
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 leading-relaxed">
+            Control who can create, review, approve, and publish social content across teams, brands, and regions.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10 max-w-5xl mx-auto">
+          {highlights.map(item => (
+            <div key={item} className="bg-slate-50 rounded-xl p-4 border border-slate-200/70 flex items-center gap-3">
+              <CheckSquare className="w-4 h-4 text-teal-600 flex-shrink-0" />
+              <span className="text-xs font-bold text-slate-800">{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Security & Compliance <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   15. AWARDS SECTION (Keep Current Verified Awards)
 ───────────────────────────────────────────── */
 function TrustedBySection() {
   const logos = [
@@ -412,34 +1390,54 @@ function TrustedBySection() {
     { name: "Eli Lilly", url: "https://marketbeam.io/wp-content/uploads/2026/06/image-217.jpg", link: "https://lilly.com" },
     { name: "Goldman Sachs", url: "https://marketbeam.io/wp-content/uploads/2026/06/image-218.jpg", link: "https://goldmansachs.com" },
     { name: "JPMorgan Chase", url: "https://marketbeam.io/wp-content/uploads/2026/06/image-219.jpg", link: "https://jpmorganchase.com" },
-    { name: "BlackRock", url: "https://marketbeam.io/wp-content/uploads/2026/06/image-220.jpg", link: "https://blackrock.com" },
-    { name: "Deloitte", url: "https://marketbeam.io/wp-content/uploads/2026/06/image-221.jpg", link: "https://deloitte.com" },
   ];
 
+  const doubledLogos = [...logos, ...logos];
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-white border-y border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-9">
-          Trusted by leading enterprises in regulated industries
-        </p>
+    <section className="py-14 bg-white border-b border-slate-100 overflow-hidden">
+      <style>{`
+        @keyframes marqueeScroll {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-scroll {
+          display: flex;
+          width: max-content;
+          animation: marqueeScroll 25s linear infinite;
+        }
+        .animate-marquee-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
-        {/* Logo marquee */}
-        <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-10 items-center">
-          {logos.map(logo => (
-            <a key={logo.name} href={logo.link} target="_blank" rel="noopener noreferrer"
-              className="transition-all duration-300 hover:opacity-75 hover:scale-105">
-              <img src={logo.url} alt={logo.name}
-                className="h-12 object-contain" title={logo.name} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-8">
+          Trusted by leading enterprise organizations
+        </p>
+      </div>
+
+      {/* Infinite Horizontal Logo Marquee */}
+      <div className="relative w-full overflow-hidden mb-12 py-2">
+        {/* Left & Right gradient edge masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div className="animate-marquee-scroll items-center gap-12 sm:gap-16">
+          {doubledLogos.map((logo, idx) => (
+            <a key={`${logo.name}-${idx}`} href={logo.link} target="_blank" rel="noopener noreferrer"
+              className="flex-shrink-0 transition-all duration-300 hover:opacity-100 opacity-75 hover:scale-105">
+              <img src={logo.url} alt={logo.name} className="h-10 sm:h-12 object-contain" title={logo.name} />
             </a>
           ))}
         </div>
+      </div>
 
-        <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-9">
-          Awards & Certifications
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+        <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-8">
+          Recognized for Innovation in Regulated Social Media
         </p>
 
-        {/* Awards & Certifications Image */}
         <div className="flex justify-center">
           <img src="https://marketbeam.io/wp-content/uploads/2026/05/Awards-new-2026.jpeg" alt="Awards & Certifications" className="max-w-full h-auto rounded-lg" />
         </div>
@@ -449,829 +1447,65 @@ function TrustedBySection() {
 }
 
 /* ─────────────────────────────────────────────
-   PLATFORM OVERVIEW
+   16. NEW SECTION: RESOURCES (Updated to 3 Primary)
 ───────────────────────────────────────────── */
-const SOLUTIONS = [
-  {
-    icon: Calendar, color: TEAL, lightBg: "#f0fdfc",
-    label: "Social Publishing",
-    tagline: "Publish compliantly across every channel",
-    desc: "AI-assisted content creation with multi-step MLR approval workflows and automated multi-channel scheduling.",
-    features: ["Content Calendar", "AI Content Generation", "Approval Workflows", "Multi-Channel Publishing", "Asset Management", "Automated Scheduling", "Campaign Management", "Role Permissions"],
-    stat: { value: "60%", label: "faster review cycles" },
-  },
-  {
-    icon: Users, color: "#3B82F6", lightBg: "#eff6ff",
-    label: "Employee Advocacy",
-    tagline: "Transform employees into brand amplifiers",
-    desc: "One-click compliant sharing with gamification, leaderboards, and enterprise reach analytics.",
-    features: ["One-Click Sharing", "Executive Advocacy", "Employee Leaderboards", "Gamification", "Reach Amplification", "Employee Analytics", "Approved Content Library", "Compliance Controls"],
-    stat: { value: "400×", label: "greater organic reach" },
-  },
-  {
-    icon: BarChart3, color: "#8B5CF6", lightBg: "#f5f3ff",
-    label: "Social Analytics",
-    tagline: "Executive-grade ROI intelligence",
-    desc: "Connect social activity to revenue with attribution tracking, competitor benchmarking, and custom C-suite dashboards.",
-    features: ["Executive Dashboards", "ROI Reporting", "Reach Analytics", "Campaign Analytics", "Attribution Tracking", "Competitor Benchmarking", "Custom Reports", "Performance Monitoring"],
-    stat: { value: "2.5×", label: "higher social ROI" },
-  },
-  {
-    icon: Eye, color: "#F59E0B", lightBg: "#fffbeb",
-    label: "Social Monitoring",
-    tagline: "AI-powered brand and risk intelligence",
-    desc: "Real-time monitoring with adverse event detection, crisis alerts, and AI categorization — never miss a compliance risk.",
-    features: ["Brand Monitoring", "Sentiment Analysis", "Competitor Tracking", "Crisis Monitoring", "Adverse Event Detection", "AI Categorization", "Response Workflows", "Compliance Alerts"],
-    stat: { value: "90%", label: "lower compliance risk" },
-  },
-  {
-    icon: Target, color: "#EF4444", lightBg: "#fff1f2",
-    label: "Prospect Intelligence",
-    tagline: "Turn social signals into pipeline",
-    desc: "Detect buying intent, enrich leads from social data, and feed CRM with sales-ready account intelligence.",
-    features: ["Buying Intent Detection", "Prospect Discovery", "Lead Enrichment", "CRM Intelligence", "Sales Alerts", "Social Engagement Insights", "Pipeline Attribution", "Account Intelligence"],
-    stat: { value: "3×", label: "more efficient teams" },
-  },
-];
-
-function SolutionMiniUI({ sol }: { sol: typeof SOLUTIONS[0] }) {
-  const bars = [55, 72, 48, 88, 64, 78, 91, 83];
-  return (
-    <div className="rounded-xl overflow-hidden border border-white/70 shadow-sm"
-      style={{ background: "white" }}>
-      {/* Title bar */}
-      <div className="px-3.5 py-2.5 border-b flex items-center justify-between"
-        style={{ borderColor: `${sol.color}20`, background: `${sol.color}08` }}>
-        <div className="flex items-center gap-2">
-          <sol.icon className="w-3.5 h-3.5" style={{ color: sol.color }} />
-          <span className="text-[10px] font-bold text-slate-700">{sol.label}</span>
-        </div>
-        <div className="w-12 h-1.5 rounded-full overflow-hidden bg-slate-100">
-          <div className="h-full rounded-full" style={{ width: "78%", background: sol.color }} />
-        </div>
-      </div>
-      {/* Content */}
-      <div className="p-3">
-        {/* Mini bars */}
-        <div className="flex items-end gap-1 h-10 mb-3">
-          {bars.map((h, i) => (
-            <div key={i} className="flex-1 rounded-sm"
-              style={{
-                height: `${h}%`,
-                background: i > 5 ? sol.color : `${sol.color}30`
-              }} />
-          ))}
-        </div>
-        {/* Feature rows */}
-        <div className="space-y-1.5">
-          {sol.features.slice(0, 3).map((f, i) => (
-            <div key={f} className="flex items-center justify-between">
-              <span className="text-[9px] font-semibold text-slate-500">{f}</span>
-              <div className="flex items-center gap-1">
-                <div className="w-8 h-1 rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${85 - i * 10}%`, background: sol.color }} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PlatformSection() {
-  const [active, setActive] = useState(0);
-  const sol = SOLUTIONS[active];
-
-  return (
-    <section id="platform" className="py-16 sm:py-20 lg:py-28" style={{ background: "#F8FAFC" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
-            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
-            <Layers className="w-3 h-3" /> Platform Overview
-          </div>
-          <h2 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.4rem] xl:text-[2.8rem] font-extrabold text-slate-900 mb-4 sm:mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            One Platform.{" "}
-            <span style={{ color: TEAL }}>Five Enterprise Solutions.</span>
-          </h2>
-          <p className="text-[0.95rem] sm:text-[1rem] lg:text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Everything regulated enterprises need to publish, amplify, monitor, analyze, and convert — unified in a single AI-powered compliance platform.
-          </p>
-        </div>
-
-        {/* Solution tabs */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-14">
-          {SOLUTIONS.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <button key={s.label} onClick={() => setActive(i)}
-                className={cn(
-                  "flex items-center gap-2 px-4.5 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-200 border",
-                  i === active
-                    ? "text-white shadow-lg scale-[1.02] border-transparent"
-                    : "text-slate-500 bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm hover:text-slate-700"
-                )}
-                style={i === active
-                  ? { background: `linear-gradient(135deg, ${s.color}, ${s.color}cc)`, boxShadow: `0 8px 24px ${s.color}40` }
-                  : {}}>
-                <Icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{s.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active solution */}
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
-          {/* Detail card */}
-          <div className="lg:col-span-3 bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
-            <div className="flex items-start gap-5 mb-7">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm"
-                style={{ background: sol.lightBg }}>
-                <sol.icon className="w-8 h-8" style={{ color: sol.color }} />
-              </div>
-              <div>
-                <div className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: sol.color }}>
-                  Solution {SOLUTIONS.indexOf(sol) + 1} of 5
-                </div>
-                <h3 className="text-2xl font-extrabold text-slate-900 leading-tight mb-1"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {sol.label}
-                </h3>
-                <p className="text-sm text-slate-400 font-semibold">{sol.tagline}</p>
-              </div>
-            </div>
-
-            <p className="text-[15px] text-slate-500 leading-relaxed mb-8">{sol.desc}</p>
-
-            <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-8">
-              {sol.features.map(f => (
-                <div key={f} className="flex items-center gap-2.5 text-[13.5px] font-semibold text-slate-700">
-                  <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
-                    style={{ background: sol.lightBg }}>
-                    <CheckCircle2 className="w-3.5 h-3.5" style={{ color: sol.color }} />
-                  </div>
-                  {f}
-                </div>
-              ))}
-            </div>
-
-            {/* Stat highlight */}
-            <div className="flex items-center gap-5 p-5 rounded-2xl border" style={{ background: sol.lightBg, borderColor: `${sol.color}25` }}>
-              <div className="text-4xl font-extrabold" style={{ color: sol.color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                {sol.stat.value}
-              </div>
-              <div>
-                <div className="text-sm font-bold text-slate-700">{sol.stat.label}</div>
-                <div className="text-xs text-slate-400">Measured customer outcome</div>
-              </div>
-              <a href="#demo" className="ml-auto inline-flex items-center gap-1.5 text-[13px] font-bold px-5 py-2.5 rounded-xl text-white flex-shrink-0 transition-all hover:opacity-90"
-                style={{ background: sol.color }}>
-                Explore <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Mini UI preview */}
-          <div className="lg:col-span-2 rounded-3xl p-6 border" style={{ background: sol.lightBg, borderColor: `${sol.color}20` }}>
-            <div className="text-[11px] font-bold uppercase tracking-widest mb-4" style={{ color: sol.color }}>
-              Live Platform Preview
-            </div>
-            <SolutionMiniUI sol={sol} />
-
-            {/* Secondary mini cards */}
-            <div className="grid grid-cols-2 gap-3 mt-4">
-              {[
-                { label: "Active", value: "847" },
-                { label: "This Month", value: "+31%" },
-                { label: "Score", value: "A+" },
-                { label: "Channels", value: "12" },
-              ].map(s => (
-                <div key={s.label} className="bg-white rounded-xl p-3.5 text-center border shadow-sm" style={{ borderColor: `${sol.color}20` }}>
-                  <div className="text-base font-extrabold" style={{ color: sol.color }}>{s.value}</div>
-                  <div className="text-[10px] text-slate-400 font-semibold">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   WORKFLOW
-───────────────────────────────────────────── */
-const WORKFLOW_STEPS = [
-  { icon: Cpu, label: "Create Content", sub: "AI-assisted generation", color: TEAL },
-  { icon: Eye, label: "Review", sub: "MLR / Legal / Regulatory", color: "#3B82F6" },
-  { icon: CheckCircle2, label: "Approve", sub: "Multi-level sign-off", color: "#10B981" },
-  { icon: Globe, label: "Publish", sub: "Multi-channel, scheduled", color: "#8B5CF6" },
-  { icon: Users, label: "Amplify", sub: "Employee advocacy network", color: "#F59E0B" },
-  { icon: Activity, label: "Monitor", sub: "AI real-time monitoring", color: "#EF4444" },
-  { icon: BarChart3, label: "Analyze", sub: "ROI & attribution reporting", color: "#06B6D4" },
-  { icon: Target, label: "Convert", sub: "Pipeline & revenue impact", color: "#84CC16" },
-];
-
-function WorkflowSection() {
-  const [hovered, setHovered] = useState<number | null>(null);
-  return (
-    <section className="py-28 relative overflow-hidden"
-      style={{ background: `linear-gradient(160deg, ${NAVY} 0%, ${NAVY2} 100%)` }}>
-      {/* Noise texture */}
-      <div className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }} />
-
-      {/* Teal glow center */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(9,169,158,0.08), transparent)" }} />
-
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border border-white/15"
-            style={{ color: TEAL, background: `${TEAL}15` }}>
-            <Workflow className="w-3 h-3" /> End-to-End Compliance Workflow
-          </div>
-          <h2 className="text-[2.4rem] lg:text-[2.8rem] font-extrabold text-white mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            From Creation to Conversion —{" "}
-            <span style={{ color: TEAL }}>Always Compliant</span>
-          </h2>
-          <p className="text-[1.05rem] text-white/50 max-w-xl mx-auto">
-            A seamless AI-powered workflow that takes content from ideation through compliance review to measurable revenue impact.
-          </p>
-        </div>
-
-        {/* Steps grid */}
-        <div className="relative">
-          {/* Dashed connector */}
-          <div className="absolute top-10 left-[6%] right-[6%] h-px hidden lg:block"
-            style={{
-              backgroundImage: `repeating-linear-gradient(90deg, ${TEAL}60 0, ${TEAL}60 12px, transparent 12px, transparent 22px)`
-            }} />
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 lg:gap-2">
-            {WORKFLOW_STEPS.map((step, i) => {
-              const Icon = step.icon;
-              const isHovered = hovered === i;
-              return (
-                <div key={step.label}
-                  className="flex flex-col items-center text-center cursor-default"
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}>
-                  {/* Icon circle */}
-                  <div className="relative mb-4 z-10">
-                    <div className={cn(
-                      "w-20 h-20 rounded-2xl flex items-center justify-center border-2 transition-all duration-300",
-                      isHovered ? "scale-110 shadow-2xl" : "scale-100"
-                    )}
-                      style={{
-                        background: isHovered ? step.color : "rgba(255,255,255,0.06)",
-                        borderColor: isHovered ? step.color : "rgba(255,255,255,0.1)",
-                        boxShadow: isHovered ? `0 20px 48px ${step.color}50` : undefined
-                      }}>
-                      <Icon className="w-7 h-7 transition-colors duration-300"
-                        style={{ color: isHovered ? "white" : "rgba(255,255,255,0.45)" }} />
-                    </div>
-                    {/* Step number */}
-                    <div className="absolute -top-2.5 -right-2.5 w-5 h-5 rounded-full text-[10px] font-extrabold flex items-center justify-center text-white"
-                      style={{ background: step.color }}>
-                      {i + 1}
-                    </div>
-                    {/* Connector arrow (between steps) */}
-                    {i < WORKFLOW_STEPS.length - 1 && (
-                      <div className="absolute top-1/2 -right-3 -translate-y-1/2 hidden lg:block">
-                        <ChevronRight className="w-3 h-3" style={{ color: `${TEAL}50` }} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-[11.5px] font-bold text-white/80 mb-0.5 leading-tight">{step.label}</div>
-                  <div className="text-[9.5px] text-white/35 leading-tight px-1">{step.sub}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Bottom caption */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-6">
-          {["AI-powered at every step", "Full audit trail preserved", "Zero compliance gaps", "Real-time ROI visibility"].map(item => (
-            <div key={item} className="flex items-center gap-2 text-[12px] font-semibold text-white/45">
-              <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: TEAL }} />
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   INDUSTRIES
-───────────────────────────────────────────── */
-const INDUSTRIES = [
-  {
-    icon: FlaskConical, color: TEAL, bg: "#f0fdfc",
-    title: "Life Sciences",
-    desc: "MLR review workflows, adverse event monitoring, FDA-compliant publishing, and HCP engagement tracking for biotech and research organizations.",
-    regs: ["FDA 21 CFR", "MLR Review", "AE Detection"],
-  },
-  {
-    icon: HeartPulse, color: "#3B82F6", bg: "#eff6ff",
-    title: "Pharmaceuticals",
-    desc: "Promotional material review, drug information compliance, physician communications, and full regulatory-grade audit trails.",
-    regs: ["FDA", "EMA", "PAAB"],
-  },
-  {
-    icon: Activity, color: "#8B5CF6", bg: "#f5f3ff",
-    title: "Medical Devices",
-    desc: "Device labeling compliance, post-market surveillance monitoring, HCP engagement, and multi-region regulatory oversight.",
-    regs: ["FDA 510(k)", "CE Mark", "MDR"],
-  },
-  {
-    icon: TrendingUp, color: "#F59E0B", bg: "#fffbeb",
-    title: "Financial Services",
-    desc: "FINRA and SEC compliant investment communications, advisor supervision, and fully archived records management.",
-    regs: ["FINRA", "SEC", "MiFID II"],
-  },
-  {
-    icon: Landmark, color: "#EF4444", bg: "#fff1f2",
-    title: "Banking",
-    desc: "Consumer communication compliance, real-time risk monitoring, regulatory disclosure management, and global brand governance.",
-    regs: ["FDIC", "OCC", "Basel III"],
-  },
-  {
-    icon: Briefcase, color: "#06B6D4", bg: "#ecfeff",
-    title: "Insurance",
-    desc: "Product marketing compliance, agent communication oversight, multi-state regulatory management, and policyholder disclosures.",
-    regs: ["NAIC", "State DOI", "Lloyd's"],
-  },
-  {
-    icon: Building2, color: "#84CC16", bg: "#f7fee7",
-    title: "Enterprise Technology",
-    desc: "Global brand consistency, multi-market publishing, executive thought leadership programs, and enterprise governance at scale.",
-    regs: ["GDPR", "CCPA", "ISO 27001"],
-  },
-];
-
-function IndustriesSection() {
-  return (
-    <section id="industries" className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
-            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
-            <Building2 className="w-3 h-3" /> Industry Solutions
-          </div>
-          <h2 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.4rem] xl:text-[2.8rem] font-extrabold text-slate-900 mb-4 sm:mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            Purpose-Built for Every{" "}
-            <span style={{ color: TEAL }}>Regulated Industry</span>
-          </h2>
-          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto">
-            Compliance requirements differ by industry. MarketBeam is pre-configured for each regulatory environment — not generic software bolted on.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
-          {INDUSTRIES.map(ind => {
-            const Icon = ind.icon;
-            return (
-              <div key={ind.title}
-                className="group relative rounded-2xl border border-slate-100 bg-white p-6 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer overflow-hidden">
-                {/* Hover glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
-                  style={{ background: `linear-gradient(135deg, ${ind.bg}, white)` }} />
-
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: ind.bg }}>
-                    <Icon className="w-6 h-6" style={{ color: ind.color }} />
-                  </div>
-                  <h3 className="text-[15px] font-extrabold text-slate-800 mb-2.5"
-                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {ind.title}
-                  </h3>
-                  <p className="text-[12.5px] text-slate-500 leading-relaxed mb-4">{ind.desc}</p>
-
-                  {/* Regulation chips */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {ind.regs.map(r => (
-                      <span key={r} className="text-[10px] font-bold px-2 py-0.5 rounded-md"
-                        style={{ color: ind.color, background: `${ind.color}15` }}>
-                        {r}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-1 text-[12px] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ color: ind.color }}>
-                    Explore solution <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   COMPLIANCE
-───────────────────────────────────────────── */
-const COMPLIANCE_FEATURES = [
-  { icon: GitBranch, title: "MLR Workflows", desc: "Medical, legal, regulatory review automation with configurable routing and escalation rules." },
-  { icon: Shield, title: "FDA Supported", desc: "21 CFR Part 11 compliant workflows for pharmaceutical and device promotional materials." },
-  { icon: FileText, title: "FINRA Compliance", desc: "Rule 2210 supervision, pre-approval routing, and FINRA-ready archiving built in." },
-  { icon: Landmark, title: "SEC Compliance", desc: "Investment adviser and broker-dealer communication standards and recordkeeping." },
-  { icon: Archive, title: "Audit Logs", desc: "Immutable, timestamped, tamper-proof records of every action across every workflow." },
-  { icon: ClipboardList, title: "Governance Policies", desc: "Enterprise-wide policy enforcement with delegation controls across teams and geographies." },
-  { icon: CheckCircle2, title: "Approval Trails", desc: "Complete chain-of-custody for every piece of content from draft to published." },
-  { icon: Lock, title: "Role Permissions", desc: "Granular RBAC — control who can create, review, approve, and publish by role and region." },
-  { icon: Database, title: "Content Archiving", desc: "Long-term compliant retention with full-text search and regulatory retrieval capabilities." },
-  { icon: FileBarChart, title: "Regulatory Reporting", desc: "One-click compliance reports configured for any regulatory body or audit request." },
-];
-
-function ComplianceSection() {
-  return (
-    <section id="compliance" className="py-28 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10"
-        style={{ background: "linear-gradient(160deg, #f0fdfc 0%, #eff6ff 100%)" }} />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full -z-10 opacity-30"
-        style={{ background: `radial-gradient(circle, ${TEAL}40, transparent)`, transform: "translate(40%,-40%)" }} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Left */}
-          <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-6 border bg-white"
-              style={{ color: TEAL, borderColor: `${TEAL}30` }}>
-              <ShieldCheck className="w-3 h-3" /> Enterprise Compliance
-            </div>
-            <h2 className="text-[2.4rem] lg:text-[2.8rem] font-extrabold text-slate-900 mb-6 leading-[1.1] tracking-tight"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-              Compliance Built Into{" "}
-              <span style={{ color: TEAL }}>Every Workflow</span>
-            </h2>
-            <p className="text-[1.05rem] text-slate-500 leading-relaxed mb-8">
-              MarketBeam is not a compliance add-on retrofitted to a social tool. It is a compliance-first platform where every feature, every workflow, and every approval step is purpose-built to reduce regulatory risk and accelerate review cycles.
-            </p>
-
-            {/* Cert badges */}
-            <div className="flex flex-wrap gap-2.5 mb-8">
-              {["HIPAA", "SOC 2 Type II", "FINRA", "SEC 17a-4", "FDA 21 CFR", "GDPR", "ISO 27001", "CCPA"].map(cert => (
-                <div key={cert}
-                  className="flex items-center gap-1.5 text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-white border border-slate-100 shadow-sm"
-                  style={{ color: TEAL_DARK }}>
-                  <Shield className="w-3 h-3" style={{ color: TEAL }} />
-                  {cert}
-                </div>
-              ))}
-            </div>
-
-            {/* Shield visual */}
-            <div className="flex items-center gap-4 p-6 rounded-2xl border border-[#09A99E]/20 bg-white shadow-sm">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})` }}>
-                <ShieldCheck className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <div className="text-base font-extrabold text-slate-800 mb-1">Zero Compliance Violations</div>
-                <div className="text-sm text-slate-400">
-                  Customers report zero regulatory violations in the 18 months after deploying MarketBeam's compliance workflows.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: feature grid */}
-          <div className="grid grid-cols-2 gap-3">
-            {COMPLIANCE_FEATURES.map(f => {
-              const Icon = f.icon;
-              return (
-                <div key={f.title}
-                  className="group bg-white rounded-2xl border border-slate-100 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3.5"
-                    style={{ background: `${TEAL}12` }}>
-                    <Icon className="w-4.5 h-4.5" style={{ color: TEAL }} />
-                  </div>
-                  <div className="text-[13px] font-extrabold text-slate-800 mb-1.5">{f.title}</div>
-                  <div className="text-[11.5px] text-slate-400 leading-relaxed">{f.desc}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   INTEGRATIONS
-───────────────────────────────────────────── */
-const INTEGRATIONS = [
-  { name: "Veeva Vault", cat: "Life Sciences", color: "#F47721", tier: "featured", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLpyeI6CkQSisxZqpK1sUQ9pGXJpSmjwxwiDhQoMSDLQ&s=10" },
-  { name: "Salesforce", cat: "CRM", color: "#00A1E0", tier: "featured", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDnHxaiWDSP12X4w_hN3tSE4JkgLTt6wfJDED8D8IOg&s=10" },
-  { name: "HubSpot", cat: "Marketing", color: "#FF7A59", tier: "featured", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GYjHv0ygt0wSwDrkS_rM5V3EtupBnF_EL1u6f1WRWg&s=10" },
-  { name: "LinkedIn", cat: "Social", color: "#0A66C2", tier: "featured", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRti_hHULf5IumOwOvXB4elZqf5VPTDPqK4NKnzVWJZcw&s=10" },
-  { name: "Slack", cat: "Collaboration", color: "#4A154B", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6xbrbBttDkmewr22dLmq-lHCXAwgLZ5xx4LVTnseMyQ&s=10" },
-  { name: "Microsoft Teams", cat: "Collaboration", color: "#5059C9", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7p-BGvz88d9VUOx165grkkmXpTbdTAzXhHsyqjDQjMw&s=10" },
-  { name: "Workday", cat: "HRIS", color: "#F5A623", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4FlbLcKMJ1RRDd9yy0fW5pfRYp08nXngjXr9IMc7rHA&s=10" },
-  { name: "Tableau", cat: "Analytics", color: "#E8762D", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlF0oVZfwLaX-bOhRs-xgbWudMICIgBSYUtYADHVPADw&s=10" },
-  { name: "Twitter / X", cat: "Social", color: "#000000", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJtf3wb3EB4Tbgs6pHMYFXir2Sca6OlI-Ka4GnHJQ-5A&s=10" },
-  { name: "Facebook", cat: "Social", color: "#1877F2", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEY-bJCWKl8XQCQwHMhc5kgdiK-k3Q_lOAyJlmn9fb1g&s=10" },
-  { name: "Power BI", cat: "BI", color: "#F2C811", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRggU1bUBHWR5MLRhSbuMaG1LFJ7pV6ic3rEJIv3mxi5w&s=10" },
-  { name: "ServiceNow", cat: "Enterprise", color: "#81B5A1", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov2QoRGo7YEIPg_vZh0GVUksxS_IIOBTI_l6FNmikDw&s=10" },
-  { name: "Marketo", cat: "Marketing", color: "#5C4EE5", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ03mP4YHDRbw9VkqGNcjPXGBeOIpKrB8qX7PFEB0_eQ&s=10" },
-  { name: "Veeva CRM", cat: "Life Sciences", color: "#F47721", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH65wDVR2fIXRmqb8rOBnLGXDsA4xcBgPwsKW_uDEwag&s=10" },
-  { name: "SAP", cat: "ERP", color: "#0870C4", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoo8OyaIX33boK-mJB2WNXzx9rFy4alR5IKdfBA6jcGw&s=10" },
-  { name: "Google Analytics", cat: "Analytics", color: "#E37400", tier: "standard", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ22yCUsWhiKWLoEdx98pEK-y4JSfDxC15NzctUpzBhDw&s=10" },
-];
-
-function IntegrationsSection() {
-  return (
-    <section id="integrations" className="py-28" style={{ background: "#F8FAFC" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
-            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
-            <Zap className="w-3 h-3" /> 200+ Integrations
-          </div>
-          <h2 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.4rem] xl:text-[2.8rem] font-extrabold text-slate-900 mb-4 sm:mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            Connects to Your{" "}
-            <span style={{ color: TEAL }}>Existing Enterprise Stack</span>
-          </h2>
-          <p className="text-[1.05rem] text-slate-500 max-w-xl mx-auto">
-            Plug MarketBeam into the systems your teams already use. No rip-and-replace, no data silos.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
-          {INTEGRATIONS.map(intg => (
-            <div key={intg.name}
-              className="group bg-white rounded-2xl border border-slate-100 p-4.5 flex items-center gap-3.5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer">
-              {intg.logo ? (
-                <img src={intg.logo} alt={intg.name} className="w-11 h-11 rounded-xl flex-shrink-0 object-contain" />
-              ) : (
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 text-white text-sm font-extrabold shadow-sm"
-                  style={{ background: intg.color }}>
-                  {intg.name[0]}
-                </div>
-              )}
-              <div className="min-w-0">
-                <div className="text-[13px] font-bold text-slate-800 truncate">{intg.name}</div>
-                <div className="text-[10.5px] text-slate-400 font-semibold">{intg.cat}</div>
-              </div>
-              {intg.tier === "featured" && (
-                <div className="ml-auto flex-shrink-0">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center"
-                    style={{ background: `${TEAL}18` }}>
-                    <Star className="w-2.5 h-2.5" style={{ color: TEAL }} />
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <a href="#" className="inline-flex items-center gap-2 text-[13.5px] font-bold transition-colors"
-            style={{ color: TEAL }}>
-            View all 200+ integrations <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   STATS
-───────────────────────────────────────────── */
-function StatCard({ end, suffix = "", decimals = 0, label, sub, icon: Icon }: {
-  end: number; suffix?: string; decimals?: number;
-  label: string; sub: string; icon: React.ElementType;
-}) {
-  const { count, ref } = useCountUp(end, 2200, decimals);
-  return (
-    <div ref={ref}
-      className="group text-center rounded-3xl border border-slate-100 bg-white p-8 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform"
-        style={{ background: `${TEAL}12` }}>
-        <Icon className="w-7 h-7" style={{ color: TEAL }} />
-      </div>
-      <div className="text-[2.75rem] font-extrabold leading-none mb-2"
-        style={{ color: TEAL, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        {decimals > 0 ? count.toFixed(decimals) : Math.round(count)}{suffix}
-      </div>
-      <div className="text-[14px] font-bold text-slate-800 mb-1">{label}</div>
-      <div className="text-[12px] text-slate-400 font-medium">{sub}</div>
-    </div>
-  );
-}
-
-function StatsSection() {
-  return (
-    <section className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <h2 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.4rem] xl:text-[2.8rem] font-extrabold text-slate-900 mb-4 sm:mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            Results That Speak{" "}
-            <span style={{ color: TEAL }}>for Themselves</span>
-          </h2>
-          <p className="text-[1.05rem] text-slate-500">
-            Measured outcomes from enterprise customers across regulated industries.
-          </p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatCard end={60} suffix="%" label="Faster Review Cycles" sub="vs. manual MLR workflows" icon={Zap} />
-          <StatCard end={90} suffix="%" label="Lower Compliance Risk" sub="AI-flagged before publish" icon={ShieldCheck} />
-          <StatCard end={3} suffix="×" label="More Efficient Teams" sub="with automated workflows" icon={Users} />
-          <StatCard end={2.5} suffix="×" decimals={1} label="Higher Social ROI" sub="attributed to pipeline" icon={TrendingUp} />
-          <StatCard end={400} suffix="×" label="Greater Organic Reach" sub="through employee advocacy" icon={Globe} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   CASE STUDIES
-───────────────────────────────────────────── */
-const CASE_STUDIES = [
-  {
-    industry: "Life Sciences", company: "Global Biotech Leader", color: TEAL,
-    challenge: "50-person MLR team manually reviewing every social post across 12 therapeutic areas — review cycles taking 3–4 weeks and delaying time-sensitive launches.",
-    solution: "MarketBeam automated MLR routing, version control, and audit trails, giving all reviewers a single workspace with AI pre-screening that flags issues before human review.",
-    results: ["67% faster MLR review cycles", "Zero compliance violations in 18 months", "$2.1M in operational savings annually"],
-    quote: "MarketBeam transformed our MLR process from our biggest bottleneck into a genuine competitive advantage. We now publish in days, not weeks.",
-    author: "VP, Digital Strategy & Innovation",
-  },
-  {
-    industry: "Financial Services", company: "Top-5 US Investment Bank", color: "#3B82F6",
-    challenge: "Decentralized social media activity across 40 financial advisors creating FINRA supervision gaps, archiving failures, and growing regulatory exposure.",
-    solution: "Deployed MarketBeam with FINRA-compliant pre-approval workflows, real-time supervision dashboards, and compliant content archiving across all channels and advisors.",
-    results: ["100% FINRA compliant communications", "40 advisors unified on one platform", "3× increase in approved content volume"],
-    quote: "We went from reactive compliance fire-fighting to proactive governance in under 90 days. Our CCO finally sleeps at night.",
-    author: "Chief Compliance Officer",
-  },
-  {
-    industry: "Pharmaceuticals", company: "Fortune 500 Pharma", color: "#8B5CF6",
-    challenge: "200+ country affiliates publishing inconsistent content without centralized regulatory oversight, creating significant legal risk and brand inconsistency globally.",
-    solution: "Global MarketBeam rollout with market-specific approval workflows, approved content libraries, and a centralized compliance dashboard spanning all 200+ markets.",
-    results: ["200+ global affiliates on one platform", "89% reduction in unapproved content", "Unified global compliance oversight"],
-    quote: "For the first time, we have complete visibility and control over our global social presence — in every market, every language, every channel.",
-    author: "Global Head of Digital, Corporate Affairs",
-  },
-];
-
-function CaseStudiesSection() {
-  return (
-    <section className="py-28" style={{ background: "#F8FAFC" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-5 border"
-            style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
-            <Star className="w-3 h-3" /> Customer Success Stories
-          </div>
-          <h2 className="text-[1.75rem] sm:text-[2.2rem] lg:text-[2.4rem] xl:text-[2.8rem] font-extrabold text-slate-900 mb-4 sm:mb-5 leading-[1.1] tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-            Enterprise Success at Scale
-          </h2>
-          <p className="text-[1.05rem] text-slate-500 max-w-xl mx-auto">
-            See how the world's most regulated organizations use MarketBeam to scale social without compliance risk.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-6">
-          {CASE_STUDIES.map(cs => (
-            <div key={cs.company}
-              className="bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-              {/* Color top bar */}
-              <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${cs.color}, ${cs.color}80)` }} />
-
-              <div className="p-7 flex flex-col flex-1">
-                {/* Header */}
-                <div className="flex items-center gap-2.5 mb-6">
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg"
-                    style={{ color: cs.color, background: `${cs.color}15` }}>
-                    {cs.industry}
-                  </span>
-                  <span className="text-[12px] text-slate-400 font-semibold">{cs.company}</span>
-                </div>
-
-                {/* C/S/R */}
-                {[
-                  { heading: "Challenge", text: cs.challenge },
-                  { heading: "Solution", text: cs.solution },
-                ].map(block => (
-                  <div key={block.heading} className="mb-5">
-                    <div className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-slate-300 mb-1.5">{block.heading}</div>
-                    <p className="text-[12.5px] text-slate-600 leading-relaxed">{block.text}</p>
-                  </div>
-                ))}
-
-                <div className="mb-6">
-                  <div className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-slate-300 mb-2.5">Results</div>
-                  <div className="space-y-2">
-                    {cs.results.map(r => (
-                      <div key={r} className="flex items-start gap-2.5 text-[12.5px]">
-                        <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                          style={{ background: `${cs.color}18` }}>
-                          <Check className="w-2.5 h-2.5" style={{ color: cs.color }} />
-                        </div>
-                        <span className="font-bold text-slate-800">{r}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quote */}
-                <div className="mt-auto pt-5 border-t border-slate-50">
-                  <div className="text-2xl mb-2" style={{ color: `${cs.color}60` }}>"</div>
-                  <p className="text-[13px] italic text-slate-500 leading-relaxed mb-3">{cs.quote}</p>
-                  <div className="text-[11.5px] font-bold text-slate-700">— {cs.author}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   RESOURCES
-───────────────────────────────────────────── */
-const RESOURCES = [
-  { icon: BookOpen, cat: "Blog", color: TEAL, title: "FINRA Social Media Compliance: The Complete2026 Guide for Financial Advisors", read: "8 min" },
-  { icon: FileBarChart, cat: "Case Study", color: "#3B82F6", title: "How a Global Biotech Cut MLR Review Cycles by 67% with MarketBeam", read: "12 min" },
-  { icon: Shield, cat: "Compliance Guide", color: "#8B5CF6", title: "FDA Social Media Guidance: What Pharma Marketers Need to Know in2026", read: "15 min" },
-  { icon: Video, cat: "Webinar", color: "#F59E0B", title: "AI in Regulated Social Media: Navigating the Compliance Landscape", read: "45 min" },
-  { icon: Newspaper, cat: "Industry Report", color: "#EF4444", title: "State of Social Media in Life Sciences2026: Trends & Benchmarks", read: "20 min" },
-  { icon: LayoutDashboard, cat: "Product Guide", color: "#06B6D4", title: "Getting Started with MLR Workflow Automation: A Step-by-Step Guide", read: "10 min" },
+const PRIMARY_RESOURCES = [
+  { icon: Shield, cat: "Compliance Guide", color: TEAL, title: "FDA & FINRA Social Media Guidance: What Regulated Marketers Need to Know", read: "12 min" },
+  { icon: Video, cat: "Webinar", color: "#3B82F6", title: "AI & MLR Workflows in Regulated Social Media: Navigating Governance & Compliance", read: "45 min" },
+  { icon: FileBarChart, cat: "Customer Story", color: "#8B5CF6", title: "How Enterprise Life Sciences Teams Scale Social Publishing Compliantly", read: "10 min" },
 ];
 
 function ResourcesSection() {
   return (
-    <section id="resources" className="py-28 bg-white">
+    <section id="resources" className="py-24 bg-slate-50 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-4 border"
-              style={{ color: TEAL, borderColor: `${TEAL}30`, background: `${TEAL}0d` }}>
-              <BookOpen className="w-3 h-3" /> Resources
-            </div>
-            <h2 className="text-[2rem] lg:text-[2.4rem] font-extrabold text-slate-900 leading-tight tracking-tight"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
-              Knowledge for Compliance Leaders
-            </h2>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-4 border bg-white"
+            style={{ color: TEAL, borderColor: `${TEAL}30` }}>
+            <BookOpen className="w-3.5 h-3.5" /> RESOURCES
           </div>
-          <a href="#" className="inline-flex items-center gap-1.5 text-[13.5px] font-bold" style={{ color: TEAL }}>
-            View all resources <ArrowRight className="w-4 h-4" />
-          </a>
+          <h2 className="text-[1.8rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Learn How Leading Teams Manage Regulated Social Media
+          </h2>
+          <p className="text-[1.05rem] text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Explore practical guidance on social media compliance, MLR workflows, employee advocacy, AI, monitoring, and regulated digital marketing.
+          </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {RESOURCES.map(r => {
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+          {PRIMARY_RESOURCES.map(r => {
             const Icon = r.icon;
             return (
-              <a key={r.title} href="#"
-                className="group rounded-2xl border border-slate-100 bg-slate-50/50 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 block">
-                <div className="flex items-center gap-2.5 mb-5">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                    style={{ background: `${r.color}15` }}>
-                    <Icon className="w-4.5 h-4.5" style={{ color: r.color }} />
+              <a key={r.title} href="#demo"
+                className="group rounded-2xl border border-slate-200/80 bg-white p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-5">
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                      style={{ background: `${r.color}15` }}>
+                      <Icon className="w-4.5 h-4.5" style={{ color: r.color }} />
+                    </div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider" style={{ color: r.color }}>
+                      {r.cat}
+                    </span>
                   </div>
-                  <span className="text-[10.5px] font-extrabold uppercase tracking-wider" style={{ color: r.color }}>
-                    {r.cat}
-                  </span>
+                  <h3 className="text-base font-bold text-slate-800 leading-snug mb-4 group-hover:text-[#09A99E] transition-colors">
+                    {r.title}
+                  </h3>
                 </div>
-                <h3 className="text-[13.5px] font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#09A99E] transition-colors">
-                  {r.title}
-                </h3>
-                <div className="flex items-center justify-between">
-                  <div className="text-[11px] text-slate-400 font-semibold">{r.read} read</div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-[#09A99E] group-hover:translate-x-0.5 transition-all" />
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
+                  <span className="text-[11px] text-slate-400 font-semibold">{r.read} read</span>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#09A99E] group-hover:translate-x-1 transition-all" />
                 </div>
               </a>
             );
           })}
+        </div>
+
+        <div className="text-center">
+          <a href="#demo" className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors">
+            Explore Resources <ArrowRight className="w-3.5 h-3.5" style={{ color: TEAL }} />
+          </a>
         </div>
       </div>
     </section>
@@ -1279,75 +1513,71 @@ function ResourcesSection() {
 }
 
 /* ─────────────────────────────────────────────
-   FAQ
+   17. FAQ SECTION (Updated Accordion Questions)
 ───────────────────────────────────────────── */
 const FAQS = [
   {
-    q: "How does MarketBeam handle MLR review workflows for pharmaceutical companies?",
-    a: "MarketBeam provides fully configurable multi-step review workflows that route content through your Medical, Legal, and Regulatory teams in sequence or parallel based on content type and therapeutic area. Every version, comment, and approval decision is captured in an immutable audit log. Our AI pre-screens content before human review, flagging potential issues to reduce back-and-forth cycles.",
+    q: "How does MarketBeam support MLR review workflows?",
+    a: "MarketBeam provides fully configurable multi-step review workflows that route content through Medical, Legal, and Regulatory teams in sequence or parallel. Our automated AI precheck identifies potential disclosure, policy, and compliance risks prior to human review, while immutable audit trails log every edit, comment, and sign-off.",
   },
   {
-    q: "Which regulatory frameworks and compliance standards does MarketBeam support?",
-    a: "MarketBeam supports FINRA Rule 2210, SEC 17a-4, FDA guidance on internet and social media promotion, 21 CFR Part 11, HIPAA, GDPR, CCPA, ISO 27001, SOC 2 Type II, and more. Our dedicated compliance team monitors regulatory changes and updates the platform proactively — you're always ahead of the requirements, not behind them.",
+    q: "How does MarketBeam integrate with Veeva PromoMats?",
+    a: "MarketBeam offers a seamless integration with Veeva Vault PromoMats. Approved promotional materials move directly from Veeva into MarketBeam's governed social publishing queue, connecting creation, compliance precheck, MLR review, Veeva approval, publishing, monitoring, and audit history in one workflow.",
   },
   {
-    q: "How does the Veeva Vault PromoMats integration work?",
-    a: "MarketBeam has a native bidirectional integration with Veeva Vault PromoMats. Approved promotional content flows directly from Veeva into MarketBeam's publishing queue with all metadata preserved. Social engagement data and performance analytics can be pushed back into Veeva for regulatory documentation and promotional material tracking.",
+    q: "How does MarketBeam manage adverse events from social media?",
+    a: "MarketBeam's social monitoring engine runs 24/7 AI detection to identify potential adverse events and regulatory risk signals in real-time. Flagged interactions are immediately routed to compliance or pharmacovigilance teams with governed response templates and complete audit logging.",
   },
   {
-    q: "Can MarketBeam scale to a global multi-market enterprise organization?",
-    a: "Yes — MarketBeam is designed for global enterprise deployments with multi-market, multi-language, and multi-brand support. Our role-based access controls allow granular permission settings across regions, business units, therapeutic areas, and brands. Country affiliates can work within locally-configured compliance guardrails while corporate maintains global visibility.",
+    q: "How does Employee Advocacy maintain governance and compliance?",
+    a: "Employee advocacy operates with strict governance guardrails. Employees share content exclusively from a pre-approved, compliance-cleared library. Marketing and compliance teams retain full control over messaging, role permissions, and channel distribution while tracking reach and engagement.",
   },
   {
-    q: "How does Employee Advocacy maintain regulatory compliance?",
-    a: "Employees can only share content from a pre-approved, compliance-reviewed library. All sharing activity is tracked, attributed, and archived. Compliance teams set guardrails on which content can be shared, by which employee roles, and on which channels. Every share generates an audit record. AI continuously monitors shared content for compliance drift.",
+    q: "Which social networks does MarketBeam support?",
+    a: "MarketBeam supports all major social networks and advertising platforms including LinkedIn, Facebook, Instagram, X (Twitter), TikTok, YouTube, Reddit, as well as governed paid campaigns via LinkedIn Ads and Meta Ads Manager.",
   },
   {
-    q: "What does enterprise implementation and onboarding look like?",
-    a: "Our Enterprise Success team provides a dedicated implementation manager, technical integration engineering, compliance workflow configuration, SSO/SCIM setup, training, and go-live support. Most enterprise customers complete implementation in 60–90 days depending on integration complexity. We offer a 90-day Success Guarantee: you go live or we extend support at no charge.",
-  },
-  {
-    q: "How is MarketBeam different from general social media management tools?",
-    a: "General tools are built for marketing teams and bolt on compliance as an afterthought. MarketBeam is architected from the ground up for regulated industries — MLR workflows, adverse event detection, FINRA supervision, audit logs, and regulatory reporting are core capabilities, not add-ons. This distinction matters enormously when your social activity is subject to FDA, FINRA, or SEC review.",
+    q: "How is MarketBeam different from traditional social media management platforms?",
+    a: "Traditional social tools are built publishing-first with manual or separate compliance processes. MarketBeam is architected compliance-first, unifying MLR review workflows, Veeva integrations, adverse event monitoring, employee advocacy, and audit-ready reporting into one governed platform.",
   },
 ];
 
 function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section className="py-28" style={{ background: "#F8FAFC" }}>
+    <section className="py-24 bg-white border-t border-slate-100">
       <div className="max-w-3xl mx-auto px-5 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="text-[2.4rem] font-extrabold text-slate-900 mb-4 tracking-tight"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.025em" }}>
+          <h2 className="text-[2rem] sm:text-[2.4rem] font-extrabold text-slate-900 mb-4 tracking-tight"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             Frequently Asked Questions
           </h2>
-          <p className="text-[1.05rem] text-slate-500">
-            Everything compliance leaders and digital teams need to know before evaluating MarketBeam.
+          <p className="text-[1rem] text-slate-500">
+            Answers to key questions about MarketBeam's compliance, integrations, and capabilities.
           </p>
         </div>
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {FAQS.map((faq, i) => (
             <div key={i}
               className={cn(
-                "bg-white rounded-2xl border overflow-hidden transition-all duration-200",
-                open === i ? "border-[#09A99E]/30 shadow-md" : "border-slate-100 hover:border-slate-200"
+                "bg-slate-50 rounded-2xl border overflow-hidden transition-all duration-200",
+                open === i ? "border-[#09A99E]/40 shadow-md bg-white" : "border-slate-200/70 hover:border-slate-300"
               )}>
               <button
-                className="w-full flex items-start justify-between px-6 py-5 text-left gap-4"
+                className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
                 onClick={() => setOpen(open === i ? null : i)}>
-                <span className="text-[14px] font-bold text-slate-800 leading-snug">{faq.q}</span>
+                <span className="text-[14.5px] font-bold text-slate-800 leading-snug">{faq.q}</span>
                 <div className={cn(
-                  "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all",
+                  "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform",
                   open === i ? "rotate-180" : ""
                 )}
-                  style={{ background: open === i ? `${TEAL}15` : "#f1f5f9" }}>
-                  <ChevronDown className="w-3.5 h-3.5" style={{ color: open === i ? TEAL : "#94a3b8" }} />
+                  style={{ background: open === i ? `${TEAL}18` : "#e2e8f0" }}>
+                  <ChevronDown className="w-3.5 h-3.5" style={{ color: open === i ? TEAL : "#64748b" }} />
                 </div>
               </button>
               {open === i && (
-                <div className="px-6 pb-6">
-                  <p className="text-[13.5px] text-slate-500 leading-relaxed">{faq.a}</p>
+                <div className="px-6 pb-6 pt-1 border-t border-slate-100">
+                  <p className="text-[13.5px] text-slate-600 leading-relaxed">{faq.a}</p>
                 </div>
               )}
             </div>
@@ -1359,67 +1589,39 @@ function FAQSection() {
 }
 
 /* ─────────────────────────────────────────────
-   FINAL CTA
+   18. FINAL CTA SECTION (Updated Copy)
 ───────────────────────────────────────────── */
 function CTASection() {
   return (
-    <section id="demo" className="py-32 relative overflow-hidden"
+    <section id="demo" className="py-28 relative overflow-hidden"
       style={{ background: `linear-gradient(160deg, ${NAVY} 0%, #0a1628 100%)` }}>
-      {/* Radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-25"
           style={{ background: `radial-gradient(ellipse, ${TEAL}, transparent)` }} />
       </div>
-      {/* Grid */}
-      <div className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "48px 48px"
-        }} />
 
       <div className="max-w-4xl mx-auto px-5 lg:px-8 text-center relative z-10">
         <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full mb-8 border border-white/15"
           style={{ color: TEAL, background: `${TEAL}18` }}>
-          <Zap className="w-3 h-3" /> Get Started Today
+          <Zap className="w-3.5 h-3.5" /> GET STARTED
         </div>
 
-        <h2 className="text-[2.6rem] lg:text-[3.2rem] xl:text-[3.6rem] font-extrabold text-white mb-7 leading-[1.08] tracking-tight"
-          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: "-0.03em" }}>
-          Ready to Scale Social Media{" "}
-          <span style={{ color: TEAL }}>Without Compliance Risk?</span>
+        <h2 className="text-[2.2rem] lg:text-[2.8rem] xl:text-[3.2rem] font-extrabold text-white mb-6 leading-[1.1] tracking-tight"
+          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          Ready to Manage Social Media Without Compromising Compliance?
         </h2>
 
-        <p className="text-[1.15rem] text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Join hundreds of regulated enterprises who trust MarketBeam to publish, amplify, and monitor compliant social media — at any scale, in any market.
+        <p className="text-[1.1rem] text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">
+          See how MarketBeam can connect content creation, approvals, publishing, monitoring, employee advocacy, analytics, and compliance workflows in one platform.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
+        <div className="flex justify-center mb-10">
           <a href="#"
             className="group inline-flex items-center justify-center gap-2.5 text-[15px] font-extrabold text-white px-9 py-4 rounded-xl shadow-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_rgba(9,169,158,0.5)]"
             style={{ background: `linear-gradient(135deg, ${TEAL} 0%, ${TEAL_DARK} 100%)` }}>
-            Schedule Demo
+            Book A Demo
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
-          <a href="#"
-            className="inline-flex items-center justify-center gap-2.5 text-[15px] font-bold text-white px-9 py-4 rounded-xl border border-white/20 hover:bg-white/10 transition-all duration-200">
-            <Phone className="w-4 h-4" />
-            Talk to an Expert
-          </a>
-        </div>
-
-        {/* Trust row */}
-        <div className="flex flex-wrap items-center justify-center gap-7">
-          {[
-            "No long-term contracts required",
-            "Dedicated enterprise success manager",
-            "Compliant from day one",
-            "90-day success guarantee",
-          ].map(item => (
-            <div key={item} className="flex items-center gap-2 text-[12px] font-semibold text-white/35">
-              <Check className="w-3.5 h-3.5" style={{ color: TEAL }} />
-              {item}
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -1427,25 +1629,25 @@ function CTASection() {
 }
 
 /* ─────────────────────────────────────────────
-   FOOTER
+   FOOTER (Untouched Header/Footer Design)
 ───────────────────────────────────────────── */
 function Footer() {
   const cols = [
     {
       heading: "Platform",
-      links: ["Social Publishing", "Employee Advocacy", "Social Analytics", "Social Monitoring", "Prospect Intelligence", "AI Features"],
+      links: ["Social Publishing", "Employee Advocacy", "Social Analytics", "Social Monitoring", "Prospect Intelligence", "Paid Ads"],
     },
     {
       heading: "Industries",
-      links: ["Life Sciences", "Pharmaceuticals", "Medical Devices", "Financial Services", "Banking", "Insurance", "Enterprise Tech"],
+      links: ["Life Sciences", "Financial Services", "Enterprise Teams"],
     },
     {
       heading: "Resources",
-      links: ["Blog", "Case Studies", "Compliance Guides", "Webinars", "Industry Reports", "Documentation", "API Reference"],
+      links: ["Compliance Guide", "Webinars", "Customer Stories", "Knowledge Base"],
     },
     {
       heading: "Company",
-      links: ["About MarketBeam", "Careers", "Press & Media", "Partner Program", "Contact Us", "Security & Trust"],
+      links: ["About MarketBeam", "Contact Us", "Security & Trust"],
     },
   ];
 
@@ -1453,7 +1655,6 @@ function Footer() {
     <footer className="bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 pt-12 sm:pt-14 lg:pt-16 pb-8 sm:pb-10">
         <div className="grid lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-10 mb-14">
-          {/* Brand column */}
           <div>
             <div className="mb-5">
               <img src="https://marketbeam.io/wp-content/uploads/2024/10/Untitled-design-15-2.png" alt="MarketBeam" className="h-8 object-contain" />
@@ -1469,15 +1670,8 @@ function Footer() {
                 </a>
               ))}
             </div>
-            {/* Cert badges */}
-            <div className="flex flex-wrap gap-1.5">
-              {["SOC 2", "HIPAA", "GDPR"].map(c => (
-                <div key={c} className="text-[9.5px] font-bold px-2 py-0.5 rounded border border-slate-100 text-slate-400">{c}</div>
-              ))}
-            </div>
           </div>
 
-          {/* Link columns */}
           {cols.map(col => (
             <div key={col.heading}>
               <h5 className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-slate-900 mb-4">{col.heading}</h5>
@@ -1494,13 +1688,12 @@ function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-[11.5px] text-slate-400 font-medium">
             ©2026 MarketBeam, Inc. All rights reserved.
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR", "Security"].map(link => (
+            {["Privacy Policy", "Terms of Service", "Security"].map(link => (
               <a key={link} href="#" className="text-[11.5px] text-slate-400 hover:text-slate-700 transition-colors font-medium">
                 {link}
               </a>
@@ -1513,7 +1706,7 @@ function Footer() {
 }
 
 /* ─────────────────────────────────────────────
-   APP
+   APP MAIN ENTRY
 ───────────────────────────────────────────── */
 export default function App() {
   return (
@@ -1523,13 +1716,19 @@ export default function App() {
       <main>
         <HeroSection />
         <TrustedBySection />
-        <PlatformSection />
-        <WorkflowSection />
-        <IndustriesSection />
-        <ComplianceSection />
-        <IntegrationsSection />
         <StatsSection />
+        <IndustriesSection />
+        <PlatformSection />
+        <VeevaWorkflowSection />
+        <AISection />
+        <SocialMonitoringSection />
+        <PaidAdsSection />
+        <EmployeeAdvocacySection />
+        <ProspectIntelligenceSection />
+        <IntegrationsSection />
+        <WhyMarketBeamSection />
         <CaseStudiesSection />
+        <SecurityGovernanceSection />
         <ResourcesSection />
         <FAQSection />
         <CTASection />
